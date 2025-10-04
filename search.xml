@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>使用Hexo+NexT搭建个人博客完整教程</title>
-    <url>/2024/05/21/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/article/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Hexo 是一个基于 Node.js 的快速、简洁且高效的博客框架。它支持 Markdown 语法，并拥有丰富的主题和插件生态系统，非常适合开发者快速搭建个人技术博客。</p>
 <p>本文将手把手带你完成 Hexo 博客的搭建，并配置深受喜爱的 NexT 主题，同时集成搜索、分类、标签等核心功能，最终生成一篇可以直接部署的博客文章。</p>
 <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>在开始之前，请确保你的电脑上已安装以下工具：</p>
@@ -135,7 +135,7 @@
   </entry>
   <entry>
     <title>Windows下使用NVM管理多版本Node.js超详细教程</title>
-    <url>/2023/10/27/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%A5windows%E4%B8%BA%E4%BE%8B/</url>
+    <url>/article/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%A5windows%E4%B8%BA%E4%BE%8B/</url>
     <content><![CDATA[<blockquote>
 <p><strong>前言</strong></p>
 <p>在前端开发中，我们可能会遇到需要在不同项目中使用不同版本的 Node.js 和 npm 的情况。例如，一个旧项目需要 Node.js 14.x，而一个新项目则要求必须使用 Node.js 18.x 以上。手动管理多个版本的 Node.js 不仅繁琐，还容易造成环境混乱。</p>
