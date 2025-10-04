@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本文详细介绍了如何从零开始使用Hexo和NexT主题搭建并配置一个功能完善的个人技术博客，涵盖环境搭建、主题配置、插件集成以及最终部署等全过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo+NexT搭建个人博客完整教程">
+<meta property="og:url" content="http://example.com/2024/05/21/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="砥砺前行">
+<meta property="og:description" content="本文详细介绍了如何从零开始使用Hexo和NexT主题搭建并配置一个功能完善的个人技术博客，涵盖环境搭建、主题配置、插件集成以及最终部署等全过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-21T02:30:00.000Z">
+<meta property="article:modified_time" content="2025-10-04T13:35:26.121Z">
+<meta property="article:author" content="heitao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="NexT">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/05/21/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/21/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/","path":"2024/05/21/使用Hexo-NexT搭建个人博客/","title":"使用Hexo+NexT搭建个人博客完整教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用Hexo+NexT搭建个人博客完整教程 | 砥砺前行</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">砥砺前行</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">验证安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA-Hexo-%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">搭建 Hexo 博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85-Hexo-cli"><span class="nav-number">3.1.</span> <span class="nav-text">1. 安装 Hexo-cli</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8D%9A%E5%AE%A2%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2. 初始化博客项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-NexT-%E4%B8%BB%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">部署 NexT 主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD-NexT-%E4%B8%BB%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">1. 下载 NexT 主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%90%AF%E7%94%A8-NexT-%E4%B8%BB%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">2. 启用 NexT 主题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%E4%B8%8E%E5%8A%9F%E8%83%BD%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">主题优化与功能配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%AF%E7%94%A8-Canvas-Nest-%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C"><span class="nav-number">5.1.</span> <span class="nav-text">1. 启用 Canvas Nest 动画效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2"><span class="nav-number">5.2.</span> <span class="nav-text">2. 配置本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E2%80%9C%E5%88%86%E7%B1%BB%E2%80%9D%E4%B8%8E%E2%80%9C%E6%A0%87%E7%AD%BE%E2%80%9D%E9%A1%B5%E9%9D%A2"><span class="nav-number">5.3.</span> <span class="nav-text">3. 创建“分类”与“标签”页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9B%B4%E6%96%B0%E8%8F%9C%E5%8D%95%E9%85%8D%E7%BD%AE"><span class="nav-number">5.4.</span> <span class="nav-text">4. 更新菜单配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%9B%E5%BB%BA%E2%80%9C%E5%85%B3%E4%BA%8E%E2%80%9D%E9%A1%B5%E9%9D%A2"><span class="nav-number">5.5.</span> <span class="nav-text">5. 创建“关于”页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%B7%BB%E5%8A%A0%E4%B8%AA%E6%80%A7%E5%8C%96%E5%92%8C%E4%BA%A4%E4%BA%92%E6%95%88%E6%9E%9C"><span class="nav-number">5.6.</span> <span class="nav-text">6. 添加个性化和交互效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%EF%BC%89%E6%B7%BB%E5%8A%A0-Canvas-Nest-%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF"><span class="nav-number">5.6.1.</span> <span class="nav-text">1）添加 Canvas Nest 动态背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%EF%BC%89%E6%B7%BB%E5%8A%A0%E7%82%B9%E5%87%BB%E7%88%B1%E5%BF%83%E6%95%88%E6%9E%9C"><span class="nav-number">5.6.2.</span> <span class="nav-text">2）添加点击爱心效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="nav-number">6.</span> <span class="nav-text">如何创建一篇文章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E7%AB%A0%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">创建文章文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9"><span class="nav-number">6.2.</span> <span class="nav-text">编辑文章内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81"><span class="nav-number">6.2.1.</span> <span class="nav-text">设置文章摘要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">6.2.2.</span> <span class="nav-text">添加文章封面（可选）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E4%B8%8E%E9%83%A8%E7%BD%B2"><span class="nav-number">7.</span> <span class="nav-text">本地预览与部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="nav-number">7.1.</span> <span class="nav-text">本地预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub-Pages%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">7.2.</span> <span class="nav-text">部署到 GitHub Pages（可选）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="heitao"
+      src="/images/avator.jpg">
+  <p class="site-author-name" itemprop="name">heitao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wf0x" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wf0x" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/21/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avator.jpg">
+      <meta itemprop="name" content="heitao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="砥砺前行">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用Hexo+NexT搭建个人博客完整教程 | 砥砺前行">
+      <meta itemprop="description" content="本文详细介绍了如何从零开始使用Hexo和NexT主题搭建并配置一个功能完善的个人技术博客，涵盖环境搭建、主题配置、插件集成以及最终部署等全过程。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Hexo+NexT搭建个人博客完整教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-05-21 10:30:00" itemprop="dateCreated datePublished" datetime="2024-05-21T10:30:00+08:00">2024-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-04 21:35:26" itemprop="dateModified" datetime="2025-10-04T21:35:26+08:00">2025-10-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">技术教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本文详细介绍了如何从零开始使用Hexo和NexT主题搭建并配置一个功能完善的个人技术博客，涵盖环境搭建、主题配置、插件集成以及最终部署等全过程。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Hexo 是一个基于 Node.js 的快速、简洁且高效的博客框架。它支持 Markdown 语法，并拥有丰富的主题和插件生态系统，非常适合开发者快速搭建个人技术博客。</p>
+<p>本文将手把手带你完成 Hexo 博客的搭建，并配置深受喜爱的 NexT 主题，同时集成搜索、分类、标签等核心功能，最终生成一篇可以直接部署的博客文章。</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>在开始之前，请确保你的电脑上已安装以下工具：</p>
+<ol>
+<li><strong>Node.js</strong>: Hexo 的运行环境，请从 <a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js 官网</a> 下载并安装 LTS 版本。</li>
+<li><strong>Git</strong>: 用于版本控制以及后续部署到 GitHub Pages，请从 <a target="_blank" rel="noopener" href="https://git-scm.com/">Git 官网</a> 下载安装。</li>
+<li><strong>代码编辑器</strong>: 推荐使用 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a>，它对 Markdown 和配置文件的编辑支持极佳。</li>
+</ol>
+<h3 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h3><p>打开终端（Windows下为CMD或PowerShell，macOS&#x2F;Linux下为Terminal），运行以下命令检查环境是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v  <span class="comment"># 显示 Node.js 版本</span></span><br><span class="line">npm -v   <span class="comment"># 显示 npm 包管理器版本</span></span><br><span class="line">git --version <span class="comment"># 显示 Git 版本</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建-Hexo-博客"><a href="#搭建-Hexo-博客" class="headerlink" title="搭建 Hexo 博客"></a>搭建 Hexo 博客</h2><p>环境就绪后，我们开始创建博客项目。</p>
+<h3 id="1-安装-Hexo-cli"><a href="#1-安装-Hexo-cli" class="headerlink" title="1. 安装 Hexo-cli"></a>1. 安装 Hexo-cli</h3><p>在终端中执行以下命令，全局安装 Hexo 的命令行工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-初始化博客项目"><a href="#2-初始化博客项目" class="headerlink" title="2. 初始化博客项目"></a>2. 初始化博客项目</h3><p>创建一个文件夹作为你的博客根目录，然后在终端中进入该目录并执行初始化命令。这里我们以 <code>my_blog</code> 为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init my_blog</span><br><span class="line"><span class="built_in">cd</span> my_blog</span><br></pre></td></tr></table></figure>
+
+<p>初始化完成后，安装项目依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>此时，你的博客项目基本结构已经创建完毕。你可以执行 <code>hexo s</code> 启动本地服务器，在浏览器中访问 <code>http://localhost:4000</code> 查看默认效果。</p>
+<h2 id="部署-NexT-主题"><a href="#部署-NexT-主题" class="headerlink" title="部署 NexT 主题"></a>部署 NexT 主题</h2><p>默认的主题较为简陋，我们 NexT 主题来美化我们的博客。</p>
+<h3 id="1-下载-NexT-主题"><a href="#1-下载-NexT-主题" class="headerlink" title="1. 下载 NexT 主题"></a>1. 下载 NexT 主题</h3><p>在博客根目录下，使用 Git 克隆 NexT 主题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-启用-NexT-主题"><a href="#2-启用-NexT-主题" class="headerlink" title="2. 启用 NexT 主题"></a>2. 启用 NexT 主题</h3><p>打开博客根目录下的<strong>站点配置文件</strong> <code>_config.yml</code>，找到 <code>theme</code> 字段并将其值修改为 <code>next</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/docs/plugins.html</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/docs/themes.html</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+
+<p>保存文件后，再次启动本地服务器（<code>hexo clean &amp;&amp; hexo s</code>），刷新浏览器，你应该就能看到 NexT 主题的默认样式了。</p>
+<h2 id="主题优化与功能配置"><a href="#主题优化与功能配置" class="headerlink" title="主题优化与功能配置"></a>主题优化与功能配置</h2><p>接下来，我们对 NexT 主题进行一系列优化和功能开启。</p>
+<h3 id="1-启用-Canvas-Nest-动画效果"><a href="#1-启用-Canvas-Nest-动画效果" class="headerlink" title="1. 启用 Canvas Nest 动画效果"></a>1. 启用 Canvas Nest 动画效果</h3><p>打开<strong>主题配置文件</strong> <code>themes/next/_config.yml</code>，搜索 <code>canvas_nest</code> 并将 <code>enable</code> 选项设为 <code>true</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># themes/next/_config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">canvas_nest:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">onmobile:</span> <span class="literal">true</span> <span class="comment"># 是否在移动设备上启用</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-配置本地搜索"><a href="#2-配置本地搜索" class="headerlink" title="2. 配置本地搜索"></a>2. 配置本地搜索</h3><p>本地搜索能让用户快速在站内找到相关文章。</p>
+<p><strong>首先，安装搜索数据生成插件：</strong><br>在博客根目录运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p><strong>然后，配置站点和主题：</strong></p>
+<ol>
+<li>在<strong>站点配置文件</strong> <code>_config.yml</code> 中添加以下内容：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span>  <span class="comment"># 搜索范围，post代表文章</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span> <span class="comment"># 文件格式</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span> <span class="comment"># 显示搜索结果的最大条数</span></span><br></pre></td></tr></table></figure></li>
+<li>在<strong>主题配置文件</strong> <code>themes/next/_config.yml</code> 中启用 <code>local_search</code>：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># themes/next/_config.yml</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-创建“分类”与“标签”页面"><a href="#3-创建“分类”与“标签”页面" class="headerlink" title="3. 创建“分类”与“标签”页面"></a>3. 创建“分类”与“标签”页面</h3><p>NexT 的菜单需要指向一个实际的页面。我们需要为“分类”和“标签”分别创建页面。</p>
+<p><strong>创建分类页面：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>打开生成的 <code>source/categories/index.md</code> 文件，添加 <code>type</code> 属性：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2024-05-21 10:00:00</span><br><span class="line"><span class="section">type: &quot;categories&quot;</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>创建标签页面：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>打开生成的 <code>source/tags/index.md</code> 文件，同样添加 <code>type</code> 属性：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2024-05-21 10:01:00</span><br><span class="line"><span class="section">type: &quot;tags&quot;</span></span><br><span class="line"><span class="section">---</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-更新菜单配置"><a href="#4-更新菜单配置" class="headerlink" title="4. 更新菜单配置"></a>4. 更新菜单配置</h3><p>让“分类”和“标签”等链接显示在菜单上，需要修改<strong>主题配置文件</strong> <code>themes/next/_config.yml</code>，找到 <code>menu</code> 部分，确保以下菜单项和链接是正确的：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># themes/next/_config.yml</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line">  <span class="comment">#tags: /tags/ || tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br><span class="line">  <span class="attr">search:</span> <span class="string">/search/</span> <span class="string">||</span> <span class="string">search</span> <span class="comment"># 确保 search 已开启</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：前面的 <code>/</code> 或 <code>/categories/</code> 是路径，后面的 <code>|| home</code> 是图标，都可以按需修改。</p>
+<h3 id="5-创建“关于”页面"><a href="#5-创建“关于”页面" class="headerlink" title="5. 创建“关于”页面"></a>5. 创建“关于”页面</h3><p>一个完整的博客通常会有一个关于页面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
+<p>编辑生成的 <code>source/about/index.md</code> 文件，填入你的个人信息和介绍即可。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 关于我</span><br><span class="line"><span class="section">date: 2024-05-21 10:02:00</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">h2</span>&gt;</span></span>你好，世界！<span class="language-xml"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span>这里是我的个人博客，记录我学习和生活中的点点滴滴。<span class="language-xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-添加个性化和交互效果"><a href="#6-添加个性化和交互效果" class="headerlink" title="6. 添加个性化和交互效果"></a>6. 添加个性化和交互效果</h3><p>为了让博客更具个性和趣味性，我们可以添加一些简单的交互效果，比如动态背景和点击特效。</p>
+<h4 id="1）添加-Canvas-Nest-动态背景"><a href="#1）添加-Canvas-Nest-动态背景" class="headerlink" title="1）添加 Canvas Nest 动态背景"></a>1）添加 Canvas Nest 动态背景</h4><p>NexT 主题自带了 Canvas Nest 动画（我们已在 <strong>1. 启用 Canvas Nest 动画效果</strong> 中开启），这里我们介绍另一种更灵活的实现方式，便于叠加其他脚本。</p>
+<p>首先，创建一个自定义文件用于存放脚本代码。在博客根目录下创建 <code>source/_data</code> 文件夹（如果不存在），并在其中新建文件 <code>footer.njk</code>。</p>
+<p>打开 <code>source/_data/footer.njk</code> 文件，添加以下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 可以使用CDN资源，但建议下载到本地 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;script color=&quot;0,0,255&quot; opacity=&quot;0.5&quot; zIndex=&quot;-1&quot; count=&quot;99&quot; src=&quot;https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js&quot;&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 推荐：下载到本地，以实现离线访问和更快的加载速度 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 1. 从 https://github.com/theme-next/theme-next-canvas-nest 下载 canvas-nest.js --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 2. 将其放入 themes/next/source/js/ 目录下，并重命名为 canvas_nest.js --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 3. 在 footer.njk 中引用本地脚本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">color</span>=<span class="string">&quot;0,0,255&quot;</span> <span class="attr">opacity</span>=<span class="string">&quot;0.5&quot;</span> <span class="attr">zIndex</span>=<span class="string">&quot;-1&quot;</span> <span class="attr">count</span>=<span class="string">&quot;99&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/canvas_nest.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>说明</strong>：将 <code>canvas-nest.js</code> 下载到本地（放在 <code>themes/next/source/js/</code> 目录）并重命名，然后在 <code>footer.njk</code> 中通过 <code>/js/...</code> 引用，比直接使用CDN更稳定，且符合静态博客的原则。</p>
+</blockquote>
+<p>然后，修改<strong>主题配置文件</strong> <code>themes/next/_config.yml</code>，启用这个自定义文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># themes/next/_config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Custom File Path</span></span><br><span class="line"><span class="comment"># Define the custom file path.</span></span><br><span class="line"><span class="comment"># Create your custom files in site `source` directory and setting here.</span></span><br><span class="line"><span class="comment"># Custom file path support saas in path which will be automatically replaced by `url` in `_config.yml`.</span></span><br><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="comment">#head: source/_data/head.njk</span></span><br><span class="line">  <span class="comment">#header: source/_data/header.njk</span></span><br><span class="line">  <span class="comment">#sidebar: source/_data/sidebar.njk</span></span><br><span class="line">  <span class="comment">#postMeta: source/_data/post-meta.njk</span></span><br><span class="line">  <span class="comment">#postBodyEnd: source/_data/post-body-end.njk</span></span><br><span class="line">  <span class="comment">#footer: source/_data/footer.njk  # 确保这一行被取消注释或添加</span></span><br><span class="line">  <span class="comment">#bodyEnd: source/_data/body-end.njk</span></span><br></pre></td></tr></table></figure>
+<h4 id="2）添加点击爱心效果"><a href="#2）添加点击爱心效果" class="headerlink" title="2）添加点击爱心效果"></a>2）添加点击爱心效果</h4><p>接下来，我们同样使用刚才创建的 <code>footer.njk</code> 文件来添加点击时飞出爱心的效果。</p>
+<p>首先，在 <code>themes/next/source/js/</code> 目录下新建一个文件，命名为 <code>click_love.js</code>。</p>
+<p>打开 <code>click_love.js</code> 文件，将下面的代码粘贴进去：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">!(<span class="keyword">function</span> (<span class="params">e, t, a</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">n</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="title function_">c</span>(<span class="string">&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#x27;&#x27;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;</span>), <span class="title function_">o</span>(), <span class="title function_">r</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">r</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> e = <span class="number">0</span>; e &lt; d.<span class="property">length</span>; e++) d[e].<span class="property">alpha</span> &lt;= <span class="number">0</span> ? (t.<span class="property">body</span>.<span class="title function_">removeChild</span>(d[e].<span class="property">el</span>), d.<span class="title function_">splice</span>(e, <span class="number">1</span>)) : (d[e].<span class="property">y</span>--, (d[e].<span class="property">scale</span> += <span class="number">0.004</span>), (d[e].<span class="property">alpha</span> -= <span class="number">0.013</span>), (d[e].<span class="property">el</span>.<span class="property">style</span>.<span class="property">cssText</span> = <span class="string">&quot;left:&quot;</span> + d[e].<span class="property">x</span> + <span class="string">&quot;px;top:&quot;</span> + d[e].<span class="property">y</span> + <span class="string">&quot;px;opacity:&quot;</span> + d[e].<span class="property">alpha</span> + <span class="string">&quot;;transform:scale(&quot;</span> + d[e].<span class="property">scale</span> + <span class="string">&quot;,&quot;</span> + d[e].<span class="property">scale</span> + <span class="string">&quot;) rotate(45deg);background:&quot;</span> + d[e].<span class="property">color</span> + <span class="string">&quot;;z-index:99999&quot;</span>));</span><br><span class="line">        <span class="title function_">requestAnimationFrame</span>(r)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">o</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> t = <span class="string">&quot;function&quot;</span> == <span class="keyword">typeof</span> e.<span class="property">onclick</span> &amp;&amp; e.<span class="property">onclick</span>;</span><br><span class="line">        e.<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">            t &amp;&amp; <span class="title function_">t</span>(), <span class="title function_">i</span>(e)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">i</span>(<span class="params">e</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> a = t.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">        (a.<span class="property">className</span> = <span class="string">&quot;heart&quot;</span>),</span><br><span class="line">            d.<span class="title function_">push</span>(&#123;</span><br><span class="line">                <span class="attr">el</span>: a,</span><br><span class="line">                <span class="attr">x</span>: e.<span class="property">clientX</span> - <span class="number">5</span>,</span><br><span class="line">                <span class="attr">y</span>: e.<span class="property">clientY</span> - <span class="number">5</span>,</span><br><span class="line">                <span class="attr">scale</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">alpha</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">color</span>: <span class="title function_">s</span>()</span><br><span class="line">            &#125;),</span><br><span class="line">            t.<span class="property">body</span>.<span class="title function_">appendChild</span>(a)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">c</span>(<span class="params">e</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> a = t.<span class="title function_">createElement</span>(<span class="string">&quot;style&quot;</span>);</span><br><span class="line">        a.<span class="property">type</span> = <span class="string">&quot;text/css&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            a.<span class="title function_">appendChild</span>(t.<span class="title function_">createTextNode</span>(e))</span><br><span class="line">        &#125; <span class="keyword">catch</span> (t) &#123;</span><br><span class="line">            a.<span class="property">styleSheet</span>.<span class="property">cssText</span> = e</span><br><span class="line">        &#125;</span><br><span class="line">        t.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(a)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">s</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;rgb(&quot;</span> + ~~(<span class="number">255</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>()) + <span class="string">&quot;,&quot;</span> + ~~(<span class="number">255</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>()) + <span class="string">&quot;,&quot;</span> + ~~(<span class="number">255</span> * <span class="title class_">Math</span>.<span class="title function_">random</span>()) + <span class="string">&quot;)&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> d = [];</span><br><span class="line">    (e.<span class="property">requestAnimationFrame</span> = e.<span class="property">requestAnimationFrame</span> || e.<span class="property">webkitRequestAnimationFrame</span> || e.<span class="property">mozRequestAnimationFrame</span> || e.<span class="property">oRequestAnimationFrame</span> || e.<span class="property">msRequestAnimationFrame</span> || <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(e, <span class="number">1e3</span> / <span class="number">60</span>)</span><br><span class="line">    &#125;),</span><br><span class="line">        <span class="title function_">n</span>()</span><br><span class="line">&#125;)(<span class="variable language_">window</span>, <span class="variable language_">document</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后，回到 <code>source/_data/footer.njk</code> 文件，在 Canvas Nest 脚本的下方添加对 <code>click_love.js</code> 的引用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- source/_data/footer.njk --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">color</span>=<span class="string">&quot;0,0,255&quot;</span> <span class="attr">opacity</span>=<span class="string">&quot;0.5&quot;</span> <span class="attr">zIndex</span>=<span class="string">&quot;-1&quot;</span> <span class="attr">count</span>=<span class="string">&quot;99&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/canvas_nest.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;/js/click_love.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>保存文件后，重新生成并启动博客（<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code>），现在你的博客就有了动态背景和点击爱心的效果！</p>
+<h2 id="如何创建一篇文章"><a href="#如何创建一篇文章" class="headerlink" title="如何创建一篇文章"></a>如何创建一篇文章</h2><p>现在，你的博客框架已经搭建完成。让我们来创建第一篇真正的文章。</p>
+<h3 id="创建文章文件"><a href="#创建文章文件" class="headerlink" title="创建文章文件"></a>创建文章文件</h3><p>在博客根目录运行命令，<code>article-title</code> 替换成你的文章标题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;我的第一篇博客文章&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这会在 <code>source/_posts</code> 目录下创建 <code>我的第一篇博客文章.md</code> 文件。</p>
+<h3 id="编辑文章内容"><a href="#编辑文章内容" class="headerlink" title="编辑文章内容"></a>编辑文章内容</h3><p>用 VS Code 打开这个 Markdown 文件，你会发现基本的 Front Matter 已经创建好了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">我的第一篇博客文章</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2024-05-21 11:00:00</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="设置文章摘要"><a href="#设置文章摘要" class="headerlink" title="设置文章摘要"></a>设置文章摘要</h4><p>为了在首页只显示文章摘要而非全文，有两种推荐方法：</p>
+<ol>
+<li><p><strong>使用 <code>&lt;!-- more --&gt;</code> 标签（推荐）</strong>：在 Markdown 内容的任意位置插入此标签，首页只会显示标签之前的内容。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 欢迎来到我的博客！</span></span><br><span class="line"></span><br><span class="line">这是文章的开头部分...</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## 这是文章的后续部分</span></span><br><span class="line"></span><br><span class="line">这部分内容只有在点击&quot;阅读全文&quot;后才能看到...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>手动添加 <code>description</code></strong>：在 Front Matter 中手动编写摘要。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">我的第一篇博客文章</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2024-05-21 11:00:00</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">这篇文章主要介绍了如何在Hexo博客中撰写和格式化一篇新的文章。</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">Hexo</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">教程</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">入门指南</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="添加文章封面（可选）"><a href="#添加文章封面（可选）" class="headerlink" title="添加文章封面（可选）"></a>添加文章封面（可选）</h4><p>在文章的 Front Matter 中添加 <code>cover</code> 字段来设置文章的封面图片。图片应存放在 <code>source/images/</code> 目录下。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">我的第一篇博客文章</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2024-05-21 11:00:00</span></span><br><span class="line"><span class="attr">cover:</span> <span class="string">/images/default-cover.jpg</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">Hexo</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">入门指南</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="本地预览与部署"><a href="#本地预览与部署" class="headerlink" title="本地预览与部署"></a>本地预览与部署</h2><h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><p>每次修改了配置或文章后，都需要重新生成站点。执行以下命令来清除缓存、重新生成并启动本地服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean   <span class="comment"># 清除缓存文件 (db.json) 和生成的公共文件 (public)</span></span><br><span class="line">hexo generate <span class="comment"># 生成静态文件到 public 目录，可简写为 hexo g</span></span><br><span class="line">hexo server   <span class="comment"># 启动本地服务器，可简写为 hexo s</span></span><br></pre></td></tr></table></figure>
+<p>然后在浏览器中访问 <code>http://localhost:4000</code> 即可查看更新后的效果。</p>
+<h3 id="部署到-GitHub-Pages（可选）"><a href="#部署到-GitHub-Pages（可选）" class="headerlink" title="部署到 GitHub Pages（可选）"></a>部署到 GitHub Pages（可选）</h3><p>如果你想将博客托管在 GitHub Pages 上，方便他人访问，可以按以下步骤操作：</p>
+<ol>
+<li><strong>创建 GitHub 仓库</strong>：在你的 GitHub 账号下创建一个新仓库，命名为 <code>你的用户名.github.io</code>。</li>
+<li><strong>安装部署插件</strong>：在博客根目录安装部署工具：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li>
+<li><strong>配置站点</strong>：打开<strong>站点配置文件</strong> <code>_config.yml</code>，在文件末尾添加 <code>deploy</code> 配置：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/你的用户名/你的用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span> <span class="comment"># 注意：如果你的仓库默认分支是 master，请改成 master</span></span><br></pre></td></tr></table></figure>
+请将 <code>你的用户名</code> 替换为你的 GitHub 用户名。</li>
+<li><strong>执行部署</strong>：在终端执行一键部署命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>稍等片刻，你的博客就会自动发布到 <code>https://你的用户名.github.io</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上步骤，你已经成功搭建了一个功能完善、样式精美且充满个性的个人博客。从创建文章到配置功能、添加交互效果，再到最终的线上部署，整个流程已经清晰呈现。</p>
+<p>博客的生命力在于持续更新。开始在这里记录你的技术思考、学习笔记和生活感悟吧！期待看到一个充满活力的技术社区。</p>
+<blockquote>
+<p><strong>搭建过程中参考了以下资源：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/docs/">Hexo 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT 主题使用文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/theme-next/theme-next-canvas-nest">Canvas Nest 动画项目</a></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/NexT/" rel="tag"># NexT</a>
+              <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/10/27/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%A5windows%E4%B8%BA%E4%BE%8B/" rel="prev" title="Windows下使用NVM管理多版本Node.js超详细教程">
+                  <i class="fa fa-angle-left"></i> Windows下使用NVM管理多版本Node.js超详细教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">heitao</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+<script type="text/javascript" src="/js/click_love.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
