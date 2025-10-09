@@ -1249,7 +1249,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #d925ff;
+  background: #9d13fe;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2800,7 +2800,7 @@ header.header {
   display: inline-block;
 }
 body {
-  background: url("https://v2.api-m.com/api/heisi?return=302");
+  background: url("https://v2.api-m.com/api/wallpaper?return=302");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
