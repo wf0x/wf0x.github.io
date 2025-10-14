@@ -1,0 +1,383 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sora 视频解析</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #E53E3E; /* Warm Red */
+            --background-color: #FFF5F5; /* Warm background */
+            --card-background: #FFFFFF;
+            --text-color: #2D3748;
+            --subtle-text: #718096;
+            --border-color: #FED7D7; /* Warm border */
+            --light-purple-bg: #FFF5F5; /* Adjusted to warm theme */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for long content */
+            flex-grow: 1;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px; /* Increased width */
+            width: 100%;
+            background: var(--card-background);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 32px;
+            border: 1px solid var(--border-color);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .header i {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .subtitle {
+            font-size: 16px;
+            color: var(--subtle-text);
+            margin-top: 8px;
+        }
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.2);
+        }
+        button#parseBtn {
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button#parseBtn:hover {
+            background-color: #C53030; /* Darker warm red */
+        }
+        button#parseBtn:disabled {
+            background-color: #A0AEC0;
+            cursor: not-allowed;
+        }
+        .tutorial-details {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .tutorial-summary {
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #F7FAFC;
+        }
+        .tutorial-summary span {
+            color: var(--subtle-text);
+            font-size: 14px;
+        }
+        .tutorial-content {
+            padding: 16px;
+            background: #fff;
+        }
+        .tutorial-content img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .loading, .error, .result {
+            margin-top: 24px;
+        }
+        .loading { display: none; text-align: center; }
+        .loading.active { display: block; }
+        .spinner {
+            display: inline-block; width: 24px; height: 24px;
+            border: 3px solid rgba(229, 62, 62, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error { display: none; padding: 12px; background-color: #FFF5F5; border-left: 4px solid #E53E3E; color: #C53030; border-radius: 4px; }
+        .error.active { display: block; }
+        .result { display: none; animation: fadeIn 0.5s ease; }
+        .result.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .post-info {
+            background: var(--light-purple-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            color: var(--subtle-text);
+            font-size: 14px;
+        }
+        .stat-item { display: flex; align-items: center; gap: 6px; }
+        .video-player { width: 100%; border-radius: 12px; margin-bottom: 16px; background: #000; }
+        .download-section { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+        .download-btn { padding: 10px 20px; text-decoration: none; border-radius: 8px; font-size: 14px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px; border: 1px solid transparent; }
+        .download-btn.primary { background-color: var(--primary-color); color: white; }
+        .download-btn.primary:hover { background-color: #C53030; }
+        .download-btn.secondary { background-color: var(--card-background); color: var(--primary-color); border-color: var(--primary-color); }
+        .download-btn.secondary:hover { background-color: #FEF2F2; }
+        .section-title { font-size: 18px; font-weight: 600; color: var(--text-color); margin-bottom: 16px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card { background: #F7FAFC; border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; }
+        .link-label { font-weight: 600; color: var(--primary-color); font-size: 12px; margin-bottom: 8px; text-transform: uppercase; }
+        .link-url { word-break: break-all; color: var(--subtle-text); font-size: 14px; margin-bottom: 12px; }
+        .link-actions { display: flex; gap: 8px; }
+        .link-btn { padding: 6px 12px; font-size: 12px; border-radius: 6px; text-decoration: none; border: 1px solid; cursor: pointer; }
+        .btn-open { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .btn-copy { background: white; color: var(--primary-color); border-color: var(--primary-color); }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--subtle-text);
+            font-size: 14px;
+        }
+        .footer a {
+            color: var(--subtle-text);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s ease;
+        }
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <i class="fas fa-film"></i>
+                <h1>Sora 视频解析</h1>
+                <p class="subtitle">粘贴视频链接，一键下载高清无水印视频</p>
+            </div>
+            <div class="input-group">
+                <input type="text" id="videoUrl" placeholder="粘贴 Sora 视频链接或 ID...">
+                <button id="parseBtn" onclick="parseVideo()">
+                    <i class="fas fa-search"></i>
+                    <span>解析</span>
+                </button>
+            </div>
+            <div class="error" id="errorMsg"></div>
+            <details class="tutorial-details" id="tutorial" open>
+                <summary class="tutorial-summary">
+                    <span><i class="fas fa-question-circle"></i> 如何复制链接？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </summary>
+                <div class="tutorial-content">
+                    <img src="https://s21.ax1x.com/2025/10/14/pVqPfJK.png" alt="复制视频链接教程">
+                </div>
+            </details>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>正在解析中，请稍候...</p>
+            </div>
+            <div class="result" id="result">
+                <div class="post-info">
+                    <div class="post-title" id="postTitle"></div>
+                    <div class="post-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i>
+                            <span id="viewCount"></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-heart"></i>
+                            <span id="likeCount"></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-paperclip"></i>
+                            <span id="attachmentCount"></span>
+                        </div>
+                    </div>
+                </div>
+                <video id="videoPlayer" class="video-player" controls autoplay muted>
+                    <source id="videoSource" type="video/mp4">
+                </video>
+                <div class="download-section">
+                    <a id="downloadBtn" class="download-btn primary" download>
+                        <i class="fas fa-download"></i>
+                        <span>下载无水印视频</span>
+                    </a>
+                    <a id="downloadWmBtn" class="download-btn secondary" download>
+                        <i class="fas fa-video"></i>
+                        <span>下载带水印视频</span>
+                    </a>
+                    <a id="downloadGifBtn" class="download-btn secondary" download>
+                        <i class="fas fa-image"></i>
+                        <span>下载 GIF</span>
+                    </a>
+                </div>
+                <div class="links-section">
+                    <h3 class="section-title">其他链接</h3>
+                    <div class="links-grid" id="linksGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <a href="https://github.com/wf0x" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <span>&bull;</span>
+        <a href="https://x.com/DaLei83977" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+        <span>&bull;</span>
+        <a href="#" id="wechat-link"><i class="fab fa-weixin"></i> 微信公众号</a>
+    </footer>
+    <div id="wechat-qr-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+        <div style="background: white; padding: 20px; border-radius: 16px; text-align: center;">
+            <p style="margin-bottom: 15px; color: var(--text-color);">扫码关注我的公众号</p>
+            <img src="https://s21.ax1x.com/2025/10/14/pVqPwGT.jpg" alt="微信公众号二维码" style="width: 200px; height: 200px;">
+            <p id="close-modal" style="margin-top: 15px; color: var(--subtle-text); cursor: pointer;">关闭</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('videoUrl').addEventListener('keypress', e => e.key === 'Enter' && parseVideo());
+        async function parseVideo() {
+            const videoUrl = document.getElementById('videoUrl').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            const parseBtn = document.getElementById('parseBtn');
+            const tutorial = document.getElementById('tutorial');
+            errorMsg.classList.remove('active');
+            result.classList.remove('active');
+            if (!videoUrl) {
+                showError('请输入视频地址');
+                return;
+            }
+            const encodedUrl = encodeURIComponent(videoUrl);
+            const apiUrl = `https://sora.codeai.my/links/${encodedUrl}`;
+            loading.classList.add('active');
+            parseBtn.disabled = true;
+            parseBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>解析中</span>';
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`HTTP 错误! 状态: ${response.status}`);
+                const data = await response.json();
+                displayResult(data);
+                result.classList.add('active');
+                tutorial.open = false;
+            } catch (error) {
+                showError('解析失败: ' + error.message);
+            } finally {
+                loading.classList.remove('active');
+                parseBtn.disabled = false;
+                parseBtn.innerHTML = '<i class="fas fa-search"></i><span>解析</span>';
+            }
+        }
+        function showError(message) {
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = message;
+            errorMsg.classList.add('active');
+        }
+        function displayResult(data) {
+            document.getElementById('postTitle').textContent = data.post_info.title;
+            document.getElementById('viewCount').textContent = data.post_info.view_count;
+            document.getElementById('likeCount').textContent = data.post_info.like_count;
+            document.getElementById('attachmentCount').textContent = data.post_info.attachments_count;
+            document.getElementById('videoSource').src = data.links.mp4;
+            document.getElementById('videoPlayer').load();
+            document.getElementById('downloadBtn').href = data.links.mp4;
+            document.getElementById('downloadBtn').download = `${data.post_id}_无水印.mp4`;
+            document.getElementById('downloadWmBtn').href = data.links.mp4_wm;
+            document.getElementById('downloadWmBtn').download = `${data.post_id}_带水印.mp4`; 
+            document.getElementById('downloadGifBtn').href = data.links.gif;
+            document.getElementById('downloadGifBtn').download = `${data.post_id}.gif`;
+            const linksGrid = document.getElementById('linksGrid');
+            linksGrid.innerHTML = '';
+            const linkLabels = { 'thumbnail': '缩略图', 'api': 'API 接口', 'md': 'MD 格式' };
+            const displayLinks = ['thumbnail', 'api', 'md'];
+            for (const key of displayLinks) {
+                if (data.links[key]) {
+                    const url = data.links[key];
+                    const card = document.createElement('div');
+                    card.className = 'link-card';
+                    card.innerHTML = `
+                        <div class="link-label">${linkLabels[key] || key}</div>
+                        <div class="link-url">${url}</div>
+                        <div class="link-actions">
+                            <a href="${url}" target="_blank" class="link-btn btn-open">打开</a>
+                            <button class="link-btn btn-copy" onclick="copyToClipboard('${url}', this)">复制</button>
+                        </div>
+                    `;
+                    linksGrid.appendChild(card);
+                }
+            }
+        }
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = '已复制!';
+                setTimeout(() => { button.textContent = '复制'; }, 2000);
+            }).catch(err => console.error('复制失败:', err));
+        }
+        const wechatModal = document.getElementById('wechat-qr-modal');
+        document.getElementById('wechat-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            wechatModal.style.display = 'flex';
+        });
+        document.getElementById('close-modal').addEventListener('click', () => {
+            wechatModal.style.display = 'none';
+        });
+        wechatModal.addEventListener('click', (e) => {
+            if (e.target === wechatModal) {
+                wechatModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
