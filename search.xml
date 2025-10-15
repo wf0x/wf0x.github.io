@@ -1,125 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>在 Hexo 8.0 + NexT 主题中使用 APlayer 音乐播放器</title>
-    <url>/article/Hexo-8-0-NexT%E4%B8%BB%E9%A2%98%E4%B8%AD%E4%BD%BF%E7%94%A8APlayer%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>本教程完整说明了如何在 Hexo 8.0 与 NexT 主题中集成 APlayer 音乐播放器，详细内容请参阅作者已发布的文章：</p>
-<p><a href="https://wfxt.github.io/2022/06/16/2022/06/hexo_aplayer/">在 Hexo 中使用 APlayer</a></p>
-<p>原文包含插件安装、MetingJS 配置、布局文件修改、歌单 ID 获取等所有关键步骤，建议直接参考该博客进行操作。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
-        <tag>APlayer</tag>
-        <tag>音乐播放器</tag>
-        <tag>前端开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Windows下使用NVM管理多版本Node.js超详细教程</title>
-    <url>/article/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%A5windows%E4%B8%BA%E4%BE%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><blockquote>
-<p><strong>前言</strong></p>
-<p>在前端开发中，我们可能会遇到需要在不同项目中使用不同版本的 Node.js 和 npm 的情况。例如，一个旧项目需要 Node.js 14.x，而一个新项目则要求必须使用 Node.js 18.x 以上。手动管理多个版本的 Node.js 不仅繁琐，还容易造成环境混乱。</p>
-<p><strong>NVM (Node Version Manager)</strong> 就是来解决这个问题的强大工具。通过 NVM，我们可以轻松地在电脑上安装、切换和删除任意多个 Node.js 版本。</p>
-<p>本教程将详细讲解如何在 Windows 系统上使用 <strong>nvm-windows</strong> 来管理你的 Node.js 环境。</p>
-</blockquote>
-<h2 id="1-什么是-nvm-windows？"><a href="#1-什么是-nvm-windows？" class="headerlink" title="1. 什么是 nvm-windows？"></a>1. 什么是 nvm-windows？</h2><p><code>nvm-windows</code> 是一个专门为 Windows 系统设计的 Node.js 版本管理器。它深受 macOS 和 Linux 平台上流行的 <code>nvm</code> (Node Version Manager) 的启发，提供了一套相似的命令，让 Windows 用户也能享受到多版本 Node.js 带来的便利。</p>
-<h2 id="2-前置准备：卸载已安装的-Node-js"><a href="#2-前置准备：卸载已安装的-Node-js" class="headerlink" title="2. 前置准备：卸载已安装的 Node.js"></a>2. 前置准备：卸载已安装的 Node.js</h2><p>在安装 nvm-windows 之前，<strong>强烈建议你先卸载掉电脑上通过官网安装包或其它方式安装的 Node.js</strong>。这可以避免日后可能出现的版本冲突和环境变量混乱问题。</p>
-<h3 id="卸载步骤："><a href="#卸载步骤：" class="headerlink" title="卸载步骤："></a>卸载步骤：</h3><ol>
-<li>打开 <strong>控制面板</strong> -&gt; <strong>程序和功能</strong> (或 <strong>设置</strong> -&gt; <strong>应用</strong> -&gt; <strong>应用和功能</strong>)。</li>
-<li>在程序列表中找到 <code>Node.js</code>。</li>
-<li>选中它，然后点击 <strong>卸载</strong>。</li>
-<li>检查系统环境变量 <code>PATH</code> 中是否包含 Node.js 的安装路径 (例如 <code>C:\Program Files\nodejs\</code>)，如果存在，请将其删除。</li>
-</ol>
-<p><strong>完成以上步骤后，重启你的终端</strong> (如 CMD, PowerShell, Git Bash) 以确保所有更改生效。</p>
-<h2 id="3-安装-nvm-windows"><a href="#3-安装-nvm-windows" class="headerlink" title="3. 安装 nvm-windows"></a>3. 安装 nvm-windows</h2><p>nvm-windows 的安装过程非常简单，官方提供了一个安装程序，它会自动帮你完成所有配置。</p>
-<h3 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h3><ol>
-<li><p><strong>下载安装程序</strong><br>访问 nvm-windows 的官方 GitHub 发布页面：<br><a href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p>
-<p>在该页面，找到最新稳定版本的 “nvm-setup.exe” 文件并下载。</p>
-</li>
-<li><p><strong>运行安装程序</strong><br>找到你下载的 <code>nvm-setup.exe</code> 文件，双击运行。</p>
-</li>
-<li><p><strong>确认安装路径</strong><br>安装程序会显示一个窗口，让你选择 nvm 的安装路径。<strong>建议使用默认路径 <code>C:\nvm</code></strong>，这符合大多数人的使用习惯，也能避免后续可能出现的权限问题。<br>点击 <strong>“Next”</strong>。</p>
-</li>
-<li><p><strong>确认 Node.js 存储路径</strong><br>接下来，安装程序会让你选择 Node.js 的版本存放路径（即不同版本的 Node.js 文件将下载并解压到这个目录）。同样，<strong>建议使用默认路径 <code>C:\nodejs</code></strong>。<br>点击 <strong>“Next”</strong>。</p>
-</li>
-<li><p><strong>完成安装</strong><br>安装程序会自动配置系统环境变量（<code>NVM_HOME</code> 和 <code>NVM_SYMLINK</code>），并创建一个指向最新活动版本的符号链接 <code>C:\nodejs</code>。这是实现版本切换的关键。<br>点击 <strong>“Install”</strong> 开始安装。安装完成后，会提示你 <strong>“Installation complete. A restart may be required to finalize changes.”</strong> (安装完成。可能需要重启电脑以使更改生效)。<strong>现在可以先不重启</strong>，我们先在终端里测试一下。</p>
-</li>
-</ol>
-<h2 id="4-基本使用命令"><a href="#4-基本使用命令" class="headerlink" title="4. 基本使用命令"></a>4. 基本使用命令</h2><p>安装完成后，打开一个新的<strong>管理员权限</strong>的命令提示符 或 PowerShell 终端。以管理员身份运行可以避免一些后续安装 Node.js 版本时的权限问题。</p>
-<p>以下是 nvm-windows 最常用的几个命令：</p>
-<h3 id="4-1-查看所有可用的-Node-js-版本"><a href="#4-1-查看所有可用的-Node-js-版本" class="headerlink" title="4.1 查看所有可用的 Node.js 版本"></a>4.1 查看所有可用的 Node.js 版本</h3><p><code>nvm list available</code> (或 <code>nvm ls remote</code>) 会列出所有可以安装的远程 Node.js 版本。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 命令</span></span><br><span class="line">nvm list available</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例输出 (部分)</span></span><br><span class="line">...</span><br><span class="line"> v18.18.0</span><br><span class="line"> v18.17.1</span><br><span class="line"> ...</span><br><span class="line"> v16.20.2</span><br><span class="line"> ...</span><br><span class="line"> v14.21.3</span><br><span class="line"> ...</span><br><span class="line">LTS: Long Term Support (长期支持) 版本，推荐在生产环境中使用。</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-安装指定版本的-Node-js"><a href="#4-2-安装指定版本的-Node-js" class="headerlink" title="4.2 安装指定版本的 Node.js"></a>4.2 安装指定版本的 Node.js</h3><p>使用 <code>nvm install &lt;version&gt;</code> 命令来安装你需要的版本，例如安装最新的长期支持版。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装最新的 LTS (长期支持) 版本</span></span><br><span class="line">nvm install --lts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本，例如安装 18.18.0</span></span><br><span class="line">nvm install 18.18.0</span><br></pre></td></tr></table></figure>
-
-<p>在安装过程中，nvm 会自动下载对应的 Node.js 安装包，并将其解压到 <code>C:\nodejs</code> 目录下。</p>
-<h3 id="4-3-切换-Node-js-版本"><a href="#4-3-切换-Node-js-版本" class="headerlink" title="4.3 切换 Node.js 版本"></a>4.3 切换 Node.js 版本</h3><p>安装完成后，使用 <code>nvm use &lt;version&gt;</code> 来切换你要使用的 Node.js 版本。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到刚刚安装的 18.18.0 版本</span></span><br><span class="line">nvm use 18.18.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再次查看当前使用的版本</span></span><br><span class="line">nvm list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例输出</span></span><br><span class="line">...</span><br><span class="line">  * 18.18.0 (Currently using 64-bit executable)</span><br><span class="line">    16.20.2</span><br><span class="line">...</span><br><span class="line"><span class="comment"># 带星号 * 的即为当前正在使用的版本</span></span><br></pre></td></tr></table></figure>
-
-<p>此时，打开一个新的终端（不一定要管理员权限），输入 <code>node -v</code> 和 <code>npm -v</code>，你会发现版本已经改变了。</p>
-<h3 id="4-4-查看已安装的版本"><a href="#4-4-查看已安装的版本" class="headerlink" title="4.4 查看已安装的版本"></a>4.4 查看已安装的版本</h3><p><code>nvm list</code> 会显示所有通过 nvm 安装的 Node.js 版本。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出示例</span></span><br><span class="line">  * 18.18.0 (Currently using 64-bit executable)</span><br><span class="line">    16.20.2</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-5-卸载指定版本"><a href="#4-5-卸载指定版本" class="headerlink" title="4.5 卸载指定版本"></a>4.5 卸载指定版本</h3><p>如果某个版本不再需要，可以使用 <code>nvm uninstall &lt;version&gt;</code> 将其卸载。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 卸载 16.20.2 版本</span></span><br><span class="line">nvm uninstall 16.20.2</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-常用命令速查表"><a href="#5-常用命令速查表" class="headerlink" title="5. 常用命令速查表"></a>5. 常用命令速查表</h2><table>
-<thead>
-<tr>
-<th align="left">命令</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>nvm list available</code></td>
-<td align="left">列出所有可以安装的 Node.js 版本</td>
-</tr>
-<tr>
-<td align="left"><code>nvm install &lt;version&gt;</code></td>
-<td align="left">安装指定的 Node.js 版本</td>
-</tr>
-<tr>
-<td align="left"><code>nvm install --lts</code></td>
-<td align="left">安装最新的 LTS 版本</td>
-</tr>
-<tr>
-<td align="left"><code>nvm use &lt;version&gt;</code></td>
-<td align="left">切换到指定的 Node.js 版本</td>
-</tr>
-<tr>
-<td align="left"><code>nvm list</code></td>
-<td align="left">列出所有已安装的 Node.js 版本</td>
-</tr>
-<tr>
-<td align="left"><code>nvm uninstall &lt;version&gt;</code></td>
-<td align="left">卸载指定的 Node.js 版本</td>
-</tr>
-<tr>
-<td align="left"><code>nvm current</code></td>
-<td align="left">显示当前正在使用的 Node.js 版本</td>
-</tr>
-</tbody></table>
-<h2 id="6-结语"><a href="#6-结语" class="headerlink" title="6. 结语"></a>6. 结语</h2><p>通过以上步骤，你已经在 Windows 系统上成功搭建了基于 nvm-windows 的 Node.js 多版本环境。这个工具将极大地提高你开发不同项目时的灵活性，告别版本冲突的烦恼。</p>
-<p>现在，你可以放心地去尝试不同版本，或者在不同项目之间自由切换了。祝你编码愉快！</p>
-]]></content>
-      <categories>
-        <category>开发工具</category>
-      </categories>
-      <tags>
-        <tag>前端开发</tag>
-        <tag>Node.js</tag>
-        <tag>NVM</tag>
-        <tag>教程</tag>
-        <tag>Windows</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Hexo+NexT搭建个人博客完整教程</title>
     <url>/article/%E4%BD%BF%E7%94%A8Hexo-NexT%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Hexo 是一个基于 Node.js 的快速、简洁且高效的博客框架。它支持 Markdown 语法，并拥有丰富的主题和插件生态系统，非常适合开发者快速搭建个人技术博客。</p>
@@ -250,6 +131,125 @@
         <tag>Hexo</tag>
         <tag>NexT</tag>
         <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows下使用NVM管理多版本Node.js超详细教程</title>
+    <url>/article/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs%E6%95%99%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%A5windows%E4%B8%BA%E4%BE%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><blockquote>
+<p><strong>前言</strong></p>
+<p>在前端开发中，我们可能会遇到需要在不同项目中使用不同版本的 Node.js 和 npm 的情况。例如，一个旧项目需要 Node.js 14.x，而一个新项目则要求必须使用 Node.js 18.x 以上。手动管理多个版本的 Node.js 不仅繁琐，还容易造成环境混乱。</p>
+<p><strong>NVM (Node Version Manager)</strong> 就是来解决这个问题的强大工具。通过 NVM，我们可以轻松地在电脑上安装、切换和删除任意多个 Node.js 版本。</p>
+<p>本教程将详细讲解如何在 Windows 系统上使用 <strong>nvm-windows</strong> 来管理你的 Node.js 环境。</p>
+</blockquote>
+<h2 id="1-什么是-nvm-windows？"><a href="#1-什么是-nvm-windows？" class="headerlink" title="1. 什么是 nvm-windows？"></a>1. 什么是 nvm-windows？</h2><p><code>nvm-windows</code> 是一个专门为 Windows 系统设计的 Node.js 版本管理器。它深受 macOS 和 Linux 平台上流行的 <code>nvm</code> (Node Version Manager) 的启发，提供了一套相似的命令，让 Windows 用户也能享受到多版本 Node.js 带来的便利。</p>
+<h2 id="2-前置准备：卸载已安装的-Node-js"><a href="#2-前置准备：卸载已安装的-Node-js" class="headerlink" title="2. 前置准备：卸载已安装的 Node.js"></a>2. 前置准备：卸载已安装的 Node.js</h2><p>在安装 nvm-windows 之前，<strong>强烈建议你先卸载掉电脑上通过官网安装包或其它方式安装的 Node.js</strong>。这可以避免日后可能出现的版本冲突和环境变量混乱问题。</p>
+<h3 id="卸载步骤："><a href="#卸载步骤：" class="headerlink" title="卸载步骤："></a>卸载步骤：</h3><ol>
+<li>打开 <strong>控制面板</strong> -&gt; <strong>程序和功能</strong> (或 <strong>设置</strong> -&gt; <strong>应用</strong> -&gt; <strong>应用和功能</strong>)。</li>
+<li>在程序列表中找到 <code>Node.js</code>。</li>
+<li>选中它，然后点击 <strong>卸载</strong>。</li>
+<li>检查系统环境变量 <code>PATH</code> 中是否包含 Node.js 的安装路径 (例如 <code>C:\Program Files\nodejs\</code>)，如果存在，请将其删除。</li>
+</ol>
+<p><strong>完成以上步骤后，重启你的终端</strong> (如 CMD, PowerShell, Git Bash) 以确保所有更改生效。</p>
+<h2 id="3-安装-nvm-windows"><a href="#3-安装-nvm-windows" class="headerlink" title="3. 安装 nvm-windows"></a>3. 安装 nvm-windows</h2><p>nvm-windows 的安装过程非常简单，官方提供了一个安装程序，它会自动帮你完成所有配置。</p>
+<h3 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h3><ol>
+<li><p><strong>下载安装程序</strong><br>访问 nvm-windows 的官方 GitHub 发布页面：<br><a href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p>
+<p>在该页面，找到最新稳定版本的 “nvm-setup.exe” 文件并下载。</p>
+</li>
+<li><p><strong>运行安装程序</strong><br>找到你下载的 <code>nvm-setup.exe</code> 文件，双击运行。</p>
+</li>
+<li><p><strong>确认安装路径</strong><br>安装程序会显示一个窗口，让你选择 nvm 的安装路径。<strong>建议使用默认路径 <code>C:\nvm</code></strong>，这符合大多数人的使用习惯，也能避免后续可能出现的权限问题。<br>点击 <strong>“Next”</strong>。</p>
+</li>
+<li><p><strong>确认 Node.js 存储路径</strong><br>接下来，安装程序会让你选择 Node.js 的版本存放路径（即不同版本的 Node.js 文件将下载并解压到这个目录）。同样，<strong>建议使用默认路径 <code>C:\nodejs</code></strong>。<br>点击 <strong>“Next”</strong>。</p>
+</li>
+<li><p><strong>完成安装</strong><br>安装程序会自动配置系统环境变量（<code>NVM_HOME</code> 和 <code>NVM_SYMLINK</code>），并创建一个指向最新活动版本的符号链接 <code>C:\nodejs</code>。这是实现版本切换的关键。<br>点击 <strong>“Install”</strong> 开始安装。安装完成后，会提示你 <strong>“Installation complete. A restart may be required to finalize changes.”</strong> (安装完成。可能需要重启电脑以使更改生效)。<strong>现在可以先不重启</strong>，我们先在终端里测试一下。</p>
+</li>
+</ol>
+<h2 id="4-基本使用命令"><a href="#4-基本使用命令" class="headerlink" title="4. 基本使用命令"></a>4. 基本使用命令</h2><p>安装完成后，打开一个新的<strong>管理员权限</strong>的命令提示符 或 PowerShell 终端。以管理员身份运行可以避免一些后续安装 Node.js 版本时的权限问题。</p>
+<p>以下是 nvm-windows 最常用的几个命令：</p>
+<h3 id="4-1-查看所有可用的-Node-js-版本"><a href="#4-1-查看所有可用的-Node-js-版本" class="headerlink" title="4.1 查看所有可用的 Node.js 版本"></a>4.1 查看所有可用的 Node.js 版本</h3><p><code>nvm list available</code> (或 <code>nvm ls remote</code>) 会列出所有可以安装的远程 Node.js 版本。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 命令</span></span><br><span class="line">nvm list available</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例输出 (部分)</span></span><br><span class="line">...</span><br><span class="line"> v18.18.0</span><br><span class="line"> v18.17.1</span><br><span class="line"> ...</span><br><span class="line"> v16.20.2</span><br><span class="line"> ...</span><br><span class="line"> v14.21.3</span><br><span class="line"> ...</span><br><span class="line">LTS: Long Term Support (长期支持) 版本，推荐在生产环境中使用。</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-安装指定版本的-Node-js"><a href="#4-2-安装指定版本的-Node-js" class="headerlink" title="4.2 安装指定版本的 Node.js"></a>4.2 安装指定版本的 Node.js</h3><p>使用 <code>nvm install &lt;version&gt;</code> 命令来安装你需要的版本，例如安装最新的长期支持版。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装最新的 LTS (长期支持) 版本</span></span><br><span class="line">nvm install --lts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本，例如安装 18.18.0</span></span><br><span class="line">nvm install 18.18.0</span><br></pre></td></tr></table></figure>
+
+<p>在安装过程中，nvm 会自动下载对应的 Node.js 安装包，并将其解压到 <code>C:\nodejs</code> 目录下。</p>
+<h3 id="4-3-切换-Node-js-版本"><a href="#4-3-切换-Node-js-版本" class="headerlink" title="4.3 切换 Node.js 版本"></a>4.3 切换 Node.js 版本</h3><p>安装完成后，使用 <code>nvm use &lt;version&gt;</code> 来切换你要使用的 Node.js 版本。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到刚刚安装的 18.18.0 版本</span></span><br><span class="line">nvm use 18.18.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再次查看当前使用的版本</span></span><br><span class="line">nvm list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例输出</span></span><br><span class="line">...</span><br><span class="line">  * 18.18.0 (Currently using 64-bit executable)</span><br><span class="line">    16.20.2</span><br><span class="line">...</span><br><span class="line"><span class="comment"># 带星号 * 的即为当前正在使用的版本</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，打开一个新的终端（不一定要管理员权限），输入 <code>node -v</code> 和 <code>npm -v</code>，你会发现版本已经改变了。</p>
+<h3 id="4-4-查看已安装的版本"><a href="#4-4-查看已安装的版本" class="headerlink" title="4.4 查看已安装的版本"></a>4.4 查看已安装的版本</h3><p><code>nvm list</code> 会显示所有通过 nvm 安装的 Node.js 版本。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出示例</span></span><br><span class="line">  * 18.18.0 (Currently using 64-bit executable)</span><br><span class="line">    16.20.2</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-5-卸载指定版本"><a href="#4-5-卸载指定版本" class="headerlink" title="4.5 卸载指定版本"></a>4.5 卸载指定版本</h3><p>如果某个版本不再需要，可以使用 <code>nvm uninstall &lt;version&gt;</code> 将其卸载。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 卸载 16.20.2 版本</span></span><br><span class="line">nvm uninstall 16.20.2</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-常用命令速查表"><a href="#5-常用命令速查表" class="headerlink" title="5. 常用命令速查表"></a>5. 常用命令速查表</h2><table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>nvm list available</code></td>
+<td align="left">列出所有可以安装的 Node.js 版本</td>
+</tr>
+<tr>
+<td align="left"><code>nvm install &lt;version&gt;</code></td>
+<td align="left">安装指定的 Node.js 版本</td>
+</tr>
+<tr>
+<td align="left"><code>nvm install --lts</code></td>
+<td align="left">安装最新的 LTS 版本</td>
+</tr>
+<tr>
+<td align="left"><code>nvm use &lt;version&gt;</code></td>
+<td align="left">切换到指定的 Node.js 版本</td>
+</tr>
+<tr>
+<td align="left"><code>nvm list</code></td>
+<td align="left">列出所有已安装的 Node.js 版本</td>
+</tr>
+<tr>
+<td align="left"><code>nvm uninstall &lt;version&gt;</code></td>
+<td align="left">卸载指定的 Node.js 版本</td>
+</tr>
+<tr>
+<td align="left"><code>nvm current</code></td>
+<td align="left">显示当前正在使用的 Node.js 版本</td>
+</tr>
+</tbody></table>
+<h2 id="6-结语"><a href="#6-结语" class="headerlink" title="6. 结语"></a>6. 结语</h2><p>通过以上步骤，你已经在 Windows 系统上成功搭建了基于 nvm-windows 的 Node.js 多版本环境。这个工具将极大地提高你开发不同项目时的灵活性，告别版本冲突的烦恼。</p>
+<p>现在，你可以放心地去尝试不同版本，或者在不同项目之间自由切换了。祝你编码愉快！</p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+        <tag>Node.js</tag>
+        <tag>NVM</tag>
+        <tag>Windows</tag>
+        <tag>前端开发</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在 Hexo 8.0 + NexT 主题中使用 APlayer 音乐播放器</title>
+    <url>/article/Hexo-8-0-NexT%E4%B8%BB%E9%A2%98%E4%B8%AD%E4%BD%BF%E7%94%A8APlayer%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>本教程完整说明了如何在 Hexo 8.0 与 NexT 主题中集成 APlayer 音乐播放器，详细内容请参阅作者已发布的文章：</p>
+<p><a href="https://wfxt.github.io/2022/06/16/2022/06/hexo_aplayer/">在 Hexo 中使用 APlayer</a></p>
+<p>原文包含插件安装、MetingJS 配置、布局文件修改、歌单 ID 获取等所有关键步骤，建议直接参考该博客进行操作。</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+        <tag>前端开发</tag>
+        <tag>APlayer</tag>
+        <tag>音乐播放器</tag>
       </tags>
   </entry>
 </search>
