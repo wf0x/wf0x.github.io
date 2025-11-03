@@ -1,0 +1,577 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科普资源中心 - 探索科学奥秘</title>
+    <meta name="description" content="科普资源宣传网站，提供丰富科学知识、科普视频和在线课程">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #0d47a1;
+            --accent: #00c853;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #333;
+        } 
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background-attachment: fixed;
+        }
+        .navbar {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .hero-section {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a73e8" opacity="0.1"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%2300c853" stroke-width="0.5" stroke-opacity="0.2"/></svg>');
+            background-size: cover;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(26,115,232,0.2) 0%, rgba(13,71,161,0.4) 100%);
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        .card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .footer {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        .course-btn {
+            background: var(--accent);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .course-btn:hover {
+            background: #009e47;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
+        }
+        .custom-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            mask-size: contain;
+            -webkit-mask-size: contain;
+            mask-position: center;
+            -webkit-mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        /* 原创科普图标 */
+        .icon-science {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.8 18.4L14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6z"/></svg>');
+        }
+        .icon-video {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>');
+        }
+        .icon-course {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>');
+        }
+        .icon-data {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-5h2v5zm4 0h-2v-3h2v3zm0-5h-2v-2h2v2zm4 5h-2V7h2v10z"/></svg>');
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background-size: 50%;
+        }
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            margin: 0 5px;
+        }
+        .carousel-indicators .active {
+            background-color: var(--accent);
+        }
+        /* 兼容性处理 */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+            .stat-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-atom me-2"></i>
+                <span>科普资源中心</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#videos">科普视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses">科普课程</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources">科普资源</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">关于我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 头部区域 -->
+    <header class="hero-section text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4">探索科学奥秘<br>开启智慧之旅</h1>
+                    <p class="lead mb-5">汇聚优质科普资源，打造全民科学素养提升平台。提供丰富多样的科普视频、在线课程和科学资料，满足不同年龄段的学习需求。</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#videos" class="btn btn-light btn-lg px-4 py-3 rounded-pill fw-bold">
+                            <i class="fas fa-play-circle me-2"></i>观看科普视频
+                        </a>
+                        <a href="#courses" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill fw-bold">
+                            <i class="fas fa-book-open me-2"></i>学习科普课程
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0 bg-primary rounded-circle" style="width: 200px; height: 200px; opacity: 0.3; transform: translate(-30%, -30%);"></div>
+                        <div class="position-absolute bottom-0 end-0 bg-accent rounded-circle" style="width: 150px; height: 150px; opacity: 0.3; transform: translate(30%, 30%);"></div>
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='500' height='400' fill='%23ffffff' opacity='0.1' rx='20'/><circle cx='250' cy='200' r='150' fill='%231a73e8' opacity='0.2'/><path d='M120,150 Q250,50 380,150 T250,350 T120,150' fill='%2300c853' opacity='0.2'/></svg>" 
+                             alt="科学探索" class="img-fluid position-relative z-1 rounded-3 shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 数据统计区域 -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number" id="visitorCount">125,683</div>
+                        <div class="stat-label">累计访问用户</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">1,258</div>
+                        <div class="stat-label">科普视频资源</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">326</div>
+                        <div class="stat-label">科普课程数量</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">98.7%</div>
+                        <div class="stat-label">用户满意度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 视频号区域 -->
+    <section id="videos" class="py-5">
+        <div class="container">
+            <h2 class="section-title">科普视频号</h2>
+            <p class="text-center mb-5">点击下方视频进入微信视频号播放页，探索更多精彩科普内容</p>    
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- 轮播图 -->
+                    <div id="videoCarousel" class="carousel slide shadow-lg rounded-3 overflow-hidden" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#videoCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#videoCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#videoCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="https://video.weixin.qq.com/example1" target="_blank">
+                                    <div class="position-relative" style="height: 400px; background: linear-gradient(45deg, #1a73e8, #0d47a1);">
+                                        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+                                            <i class="fas fa-play-circle fa-4x mb-3"></i>
+                                            <h3>宇宙探索系列</h3>
+                                            <p>点击观看最新天文科普视频</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://video.weixin.qq.com/example2" target="_blank">
+                                    <div class="position-relative" style="height: 400px; background: linear-gradient(45deg, #00c853, #009688);">
+                                        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+                                            <i class="fas fa-play-circle fa-4x mb-3"></i>
+                                            <h3>生命科学揭秘</h3>
+                                            <p>探索人体与自然的奥秘</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://video.weixin.qq.com/example3" target="_blank">
+                                    <div class="position-relative" style="height: 400px; background: linear-gradient(45deg, #ff9800, #f44336);">
+                                        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+                                            <i class="fas fa-play-circle fa-4x mb-3"></i>
+                                            <h3>科技前沿动态</h3>
+                                            <p>了解最新科技创新与发展</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">上一个</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">下一个</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4">
+                    <a href="https://video.weixin.qq.com/example4" class="card h-100 text-decoration-none text-dark">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary rounded-circle p-3 me-3">
+                                    <i class="fas fa-microscope fa-2x text-white"></i>
+                                </div>
+                                <h5 class="card-title mb-0">微观世界探秘</h5>
+                            </div>
+                            <p class="card-text">走进肉眼看不见的微观世界，探索细胞、微生物和纳米技术的奇妙领域。</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="https://video.weixin.qq.com/example5" class="card h-100 text-decoration-none text-dark">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success rounded-circle p-3 me-3">
+                                    <i class="fas fa-leaf fa-2x text-white"></i>
+                                </div>
+                                <h5 class="card-title mb-0">生态保护行动</h5>
+                            </div>
+                            <p class="card-text">了解地球生态系统，学习环境保护知识，共同守护我们的蓝色星球。</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <a href="https://video.weixin.qq.com/example6" class="card h-100 text-decoration-none text-dark">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-warning rounded-circle p-3 me-3">
+                                    <i class="fas fa-robot fa-2x text-white"></i>
+                                </div>
+                                <h5 class="card-title mb-0">人工智能未来</h5>
+                            </div>
+                            <p class="card-text">探索AI技术发展，了解机器学习、深度学习如何改变我们的生活方式。</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 课程跳转区域 -->
+    <section id="courses" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">科普课程学习</h2>
+            <p class="text-center mb-5">点击课程入口按钮，跳转到专业科普课程平台学习</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="position-relative">
+                            <div style="height: 200px; background: linear-gradient(45deg, #1a73e8, #0d47a1);"></div>
+                            <div class="position-absolute top-0 end-0 bg-accent text-white px-3 py-2 rounded-bl">
+                                免费
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">天文学入门</h5>
+                            <p class="card-text">探索宇宙奥秘，了解恒星、行星和星系的基本知识，掌握天文观测技巧。</p>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <div>
+                                    <span class="badge bg-primary me-2">12课时</span>
+                                    <span class="badge bg-success">初级</span>
+                                </div>
+                                <a href="https://course.example.com/astronomy" class="course-btn" target="_blank">
+                                    课程入口 <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="position-relative">
+                            <div style="height: 200px; background: linear-gradient(45deg, #00c853, #00796b);"></div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">生命科学探秘</h5>
+                            <p class="card-text">从细胞到生态系统，全面了解生命科学知识，探索生物多样性与进化。</p>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <div>
+                                    <span class="badge bg-primary me-2">24课时</span>
+                                    <span class="badge bg-warning text-dark">中级</span>
+                                </div>
+                                <a href="https://course.example.com/lifescience" class="course-btn" target="_blank">
+                                    课程入口 <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <div class="position-relative">
+                            <div style="height: 200px; background: linear-gradient(45deg, #ff9800, #f57c00);"></div>
+                            <div class="position-absolute top-0 end-0 bg-accent text-white px-3 py-2 rounded-bl">
+                                热门
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">人工智能基础</h5>
+                            <p class="card-text">从零开始学习人工智能原理与应用，了解机器学习、深度学习等核心技术。</p>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <div>
+                                    <span class="badge bg-primary me-2">36课时</span>
+                                    <span class="badge bg-danger">高级</span>
+                                </div>
+                                <a href="https://course.example.com/ai" class="course-btn" target="_blank">
+                                    课程入口 <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="https://course.example.com/all" class="btn btn-primary btn-lg px-5 py-3" target="_blank">
+                    浏览全部科普课程 <i class="fas fa-external-link-alt ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <h4 class="mb-4"><i class="fas fa-atom me-2"></i>科普资源中心</h4>
+                    <p>致力于提供优质科普资源，提升全民科学素养，推动科学知识普及与传播。</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-qq"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-4">快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#"><i class="fas fa-angle-right me-2"></i>首页</a></li>
+                        <li class="mb-2"><a href="#videos"><i class="fas fa-angle-right me-2"></i>科普视频</a></li>
+                        <li class="mb-2"><a href="#courses"><i class="fas fa-angle-right me-2"></i>科普课程</a></li>
+                        <li class="mb-2"><a href="#resources"><i class="fas fa-angle-right me-2"></i>科普资源</a></li>
+                        <li><a href="#about"><i class="fas fa-angle-right me-2"></i>关于我们</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="mb-4">科普资源</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#"><span class="custom-icon icon-science"></span>科学文章</a></li>
+                        <li class="mb-2"><a href="#"><span class="custom-icon icon-video"></span>科普视频</a></li>
+                        <li class="mb-2"><a href="#"><span class="custom-icon icon-course"></span>在线课程</a></li>
+                        <li><a href="#"><span class="custom-icon icon-data"></span>科普数据</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="mb-4">联系我们</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex">
+                            <i class="fas fa-map-marker-alt me-3 mt-1"></i>
+                            <span>广州市天河区渔兴路18号广东工程职业技术学院</span>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <i class="fas fa-phone-alt me-3 mt-1"></i>
+                            <span>13570423797</span>
+                        </li>
+                        <li class="mb-3 d-flex">
+                            <i class="fas fa-envelope me-3 mt-1"></i>
+                            <span>pengkanghua@gdep.edu.cn</span>
+                        </li>
+                        <li class="d-flex">
+                            <i class="fas fa-clock me-3 mt-1"></i>
+                            <span>周一至周五: 9:00 - 17:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-5" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center py-3">
+                <p class="mb-0">© 2025 广东工程职业技术学院 科普资源中心 版权所有</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 访问量统计（模拟）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模拟访问量增长
+            const visitorElement = document.getElementById('visitorCount');
+            let visitors = parseInt(visitorElement.textContent.replace(/,/g, ''));
+            // 页面停留时间跟踪
+            let startTime = new Date();
+            // 模拟访问量增长效果
+            const interval = setInterval(() => {
+                visitors += Math.floor(Math.random() * 10);
+                visitorElement.textContent = visitors.toLocaleString();
+            }, 3000);
+            // 页面关闭时发送停留时间数据
+            window.addEventListener('beforeunload', function() {
+                const endTime = new Date();
+                const duration = Math.round((endTime - startTime) / 1000); // 秒   
+                // 在实际应用中，这里应该发送数据到服务器
+                console.log(`页面停留时间: ${duration}秒`);
+            });
+        });
+    </script>
+</body>
+</html>
