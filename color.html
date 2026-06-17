@@ -1,0 +1,1074 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🌈 颜色认知小课堂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ffeaa7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+        /* ========== 顶部标题栏 ========== */
+        .app-header {
+            text-align: center;
+            margin-bottom: 8px;
+            animation: headerBounce 2s ease-in-out infinite;
+        }
+        @keyframes headerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .app-header .title {
+            font-size: clamp(24px, 5vw, 36px);
+            color: #e17055;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+            font-weight: bold;
+        }
+        .app-header .subtitle {
+            font-size: clamp(12px, 2.5vw, 16px);
+            color: #d68910;
+            margin-top: 2px;
+        }
+        /* ========== 阶段指示器 ========== */
+        .phase-indicator {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .phase-dot {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.6);
+            font-size: 14px;
+            font-weight: bold;
+            color: #999;
+            transition: all 0.4s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .phase-dot.active {
+            background: #fff;
+            color: #e17055;
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px rgba(225,112,85,0.3);
+        }
+        .phase-dot.done {
+            background: #98d8aa;
+            color: #fff;
+        }
+        /* ========== 主游戏容器 ========== */
+        .game-container {
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.35);
+            backdrop-filter: blur(10px);
+            padding: 20px 24px;
+            max-width: 700px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        /* ========== 分数和进度 ========== */
+        .score-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .stars-display {
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stars-display .star {
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        .stars-display .star.earned {
+            animation: starPop 0.5s ease-out;
+        }
+        @keyframes starPop {
+            0% { transform: scale(0); }
+            60% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        .score-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e17055;
+            background: rgba(225,112,85,0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+        .round-info {
+            font-size: 14px;
+            color: #888;
+        }
+        /* ========== 题目展示区 ========== */
+        .question-area {
+            text-align: center;
+            width: 100%;
+        }
+        .question-prompt {
+            font-size: clamp(18px, 4vw, 24px);
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .object-display {
+            font-size: clamp(80px, 15vw, 150px);
+            margin: 10px 0;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+            cursor: default;
+            line-height: 1.2;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        .object-name {
+            font-size: clamp(16px, 3.5vw, 22px);
+            color: #666;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+        .object-name .color-blank {
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+            border: 3px dashed #e17055;
+            border-radius: 8px;
+            vertical-align: middle;
+            margin: 0 6px;
+            animation: blink 1s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { border-color: #e17055; background: transparent; }
+            50% { border-color: #ffb6c1; background: rgba(255,182,193,0.15); }
+        }
+        /* ========== 颜色选择按钮 ========== */
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            width: 100%;
+        }
+        .color-btn {
+            width: clamp(70px, 18vw, 110px);
+            height: clamp(70px, 18vw, 110px);
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            position: relative;
+            font-size: clamp(16px, 3.5vw, 22px);
+            font-weight: bold;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .color-btn:active {
+            transform: scale(0.9);
+        }
+        .color-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+        .color-btn.shake {
+            animation: shake 0.5s ease-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            15% { transform: translateX(-12px); }
+            30% { transform: translateX(12px); }
+            45% { transform: translateX(-8px); }
+            60% { transform: translateX(8px); }
+            75% { transform: translateX(-4px); }
+            90% { transform: translateX(4px); }
+        }
+        .color-btn.correct-pulse {
+            animation: correctPulse 0.6s ease-out;
+            border-color: #ffd700 !important;
+            box-shadow: 0 0 40px rgba(255,215,0,0.8) !important;
+        }
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.25); }
+            100% { transform: scale(1); }
+        }
+        .color-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        /* 各颜色按钮样式 */
+        .color-btn.red    { background: radial-gradient(circle at 35% 35%, #ff9999, #e8453c 80%); }
+        .color-btn.orange { background: radial-gradient(circle at 35% 35%, #ffcc80, #f7931e 80%); }
+        .color-btn.yellow { background: radial-gradient(circle at 35% 35%, #ffff99, #f0d820 80%); color: #8b7500; text-shadow: none; }
+        .color-btn.green  { background: radial-gradient(circle at 35% 35%, #90ee90, #3cb043 80%); }
+        .color-btn.blue   { background: radial-gradient(circle at 35% 35%, #87cefa, #2d8ab8 80%); }
+        .color-btn.purple { background: radial-gradient(circle at 35% 35%, #dda0dd, #9b59b6 80%); }
+        /* ========== 反馈提示区 ========== */
+        .feedback-area {
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .feedback-msg {
+            font-size: clamp(16px, 3vw, 22px);
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 16px;
+            animation: fadeInUp 0.4s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .feedback-msg.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+        .feedback-msg.wrong {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .feedback-msg.hint {
+            background: #cce5ff;
+            color: #004085;
+        }
+        /* ========== 按钮区 ========== */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+        .action-btn {
+            padding: 12px 28px;
+            font-size: clamp(15px, 3vw, 18px);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            letter-spacing: 1px;
+        }
+        .action-btn:active {
+            transform: scale(0.94);
+        }
+        .action-btn.primary {
+            background: #5dade2;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(93,173,226,0.4);
+        }
+        .action-btn.success {
+            background: #98d8aa;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(152,216,170,0.4);
+        }
+        .action-btn.warning {
+            background: #ff8a9b;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255,138,155,0.4);
+        }
+        .action-btn:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        /* ========== 弹窗 ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.show {
+            display: flex;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 30px 24px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.25);
+            max-width: 420px;
+            width: 90%;
+            animation: modalPop 0.4s ease-out;
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content .big-emoji {
+            font-size: 80px;
+            animation: float 2s ease-in-out infinite;
+        }
+        .modal-content h2 {
+            font-size: 26px;
+            margin: 10px 0;
+            color: #e17055;
+        }
+        .modal-content p {
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .modal-content .stars-row {
+            font-size: 36px;
+            margin: 10px 0;
+        }
+        /* ========== 撒花效果 ========== */
+        .confetti-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1999;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            animation: confettiFall 1.5s ease-out forwards;
+        }
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+        /* ========== 语音按钮 ========== */
+        .speak-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 2px solid #e17055;
+            background: rgba(225,112,85,0.08);
+            cursor: pointer;
+            font-size: 14px;
+            color: #e17055;
+            transition: all 0.2s;
+        }
+        .speak-btn:active {
+            background: rgba(225,112,85,0.2);
+            transform: scale(0.95);
+        }
+        /* ========== 响应式 ========== */
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 14px 12px;
+                border-radius: 18px;
+            }
+            .color-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 14px;
+                border-width: 3px;
+            }
+            .color-options {
+                gap: 8px;
+            }
+            .action-btn {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+        /* ========== 进度条 ========== */
+        .progress-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f093fb, #f5576c, #fda085);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- 标题 -->
+    <div class="app-header">
+        <div class="title">🌈 颜色认知小课堂</div>
+        <div class="subtitle">看一看 · 选一选 · 找一找</div>
+    </div>
+    <!-- 阶段指示器 -->
+    <div class="phase-indicator">
+        <div class="phase-dot active" id="phaseDot1">👀 看一看</div>
+        <div class="phase-dot" id="phaseDot2">✋ 选一选</div>
+        <div class="phase-dot" id="phaseDot3">🔍 找一找</div>
+    </div>
+    <!-- 主游戏区 -->
+    <div class="game-container" id="gameContainer">
+        <!-- 分数栏 -->
+        <div class="score-bar">
+            <div class="stars-display" id="starsDisplay">
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+            </div>
+            <span class="score-text" id="scoreText">得分：0</span>
+            <span class="round-info" id="roundInfo">第 1/10 题</span>
+        </div>
+        <!-- 进度条 -->
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="progressBar" style="width: 10%;"></div>
+        </div>
+        <!-- 题目区 -->
+        <div class="question-area" id="questionArea">
+            <div class="question-prompt" id="questionPrompt">👆 请点一下喇叭，听一听这是什么？</div>
+            <div class="object-display" id="objectEmoji">🍎</div>
+            <div class="object-name" id="objectName">这是一个 <span class="color-blank"></span> 色的苹果</div>
+            <button class="speak-btn" id="speakBtn" onclick="speakQuestion()" title="点击听语音">
+                🔊 听一听
+            </button>
+        </div>
+        <!-- 颜色选项 -->
+        <div class="color-options" id="colorOptions">
+            <button class="color-btn red"    data-color="红色" onclick="selectColor('红色', this)">红色</button>
+            <button class="color-btn orange" data-color="橙色" onclick="selectColor('橙色', this)">橙色</button>
+            <button class="color-btn yellow" data-color="黄色" onclick="selectColor('黄色', this)">黄色</button>
+            <button class="color-btn green"  data-color="绿色" onclick="selectColor('绿色', this)">绿色</button>
+            <button class="color-btn blue"   data-color="蓝色" onclick="selectColor('蓝色', this)">蓝色</button>
+            <button class="color-btn purple" data-color="紫色" onclick="selectColor('紫色', this)">紫色</button>
+        </div>
+        <!-- 反馈区 -->
+        <div class="feedback-area" id="feedbackArea"></div>
+        <!-- 操作按钮 -->
+        <div class="action-buttons">
+            <button class="action-btn warning" onclick="showHint()">💡 给点提示</button>
+            <button class="action-btn success" onclick="nextQuestion()" id="nextBtn" disabled>下一题 ➡️</button>
+            <button class="action-btn primary" onclick="resetGame()">🔄 重新开始</button>
+        </div>
+    </div>
+    <!-- 撒花容器 -->
+    <div class="confetti-container" id="confettiContainer"></div>
+    <!-- 结果弹窗 -->
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal-content">
+            <div class="big-emoji" id="modalEmoji">🎉</div>
+            <h2 id="modalTitle">太棒了！</h2>
+            <div class="stars-row" id="modalStars"></div>
+            <p id="modalMessage"></p>
+            <button class="action-btn primary" onclick="closeModal()">👍 好的！</button>
+        </div>
+    </div>
+    <!-- 完成弹窗 -->
+    <div class="modal-overlay" id="completeModal">
+        <div class="modal-content">
+            <div class="big-emoji">🏆</div>
+            <h2>学习完成！</h2>
+            <div class="stars-row" id="completeStars"></div>
+            <p id="completeMessage"></p>
+            <button class="action-btn success" onclick="resetGame()">🔄 再来一次</button>
+        </div>
+    </div>
+    <script>
+        // ==================== 颜色数据 ====================
+        // 每种颜色对应多个生活物品（贴近真实场景迁移）
+        const colorDatabase = {
+            '红色': {
+                items: [
+                    { emoji: '🍎', name: '苹果', hint: '想一想，苹果的外皮是什么颜色呀？' },
+                    { emoji: '🍓', name: '草莓', hint: '草莓红红的，是不是很像太阳落山时的颜色？' },
+                    { emoji: '🌹', name: '玫瑰花', hint: '情人节送的玫瑰花是什么颜色呢？' },
+                    { emoji: '🚗', name: '小汽车', hint: '想一想消防车是什么颜色的？' },
+                    { emoji: '🍅', name: '番茄', hint: '番茄炒蛋里，番茄是什么颜色？' },
+                    { emoji: '🧧', name: '红包', hint: '过年收到的红包是什么颜色？' },
+                    { emoji: '🫑', name: '红椒', hint: '这个辣椒和番茄颜色很像哦！' },
+                ]
+            },
+            '橙色': {
+                items: [
+                    { emoji: '🍊', name: '橙子', hint: '橙子的名字就和它的颜色一样哦！' },
+                    { emoji: '🥕', name: '胡萝卜', hint: '小兔子最爱吃的胡萝卜是什么颜色？' },
+                    { emoji: '🏀', name: '篮球', hint: '打篮球的时候，篮球是什么颜色的？' },
+                    { emoji: '🎃', name: '南瓜', hint: '万圣节的南瓜灯是什么颜色？' },
+                    { emoji: '🍑', name: '杏子', hint: '这种水果和橙子颜色差不多！' },
+                    { emoji: '🦊', name: '狐狸', hint: '小狐狸的皮毛是什么颜色的？' },
+                ]
+            },
+            '黄色': {
+                items: [
+                    { emoji: '🍌', name: '香蕉', hint: '香蕉弯弯的，颜色是……？' },
+                    { emoji: '🌻', name: '向日葵', hint: '向日葵总是朝着太阳，它的花瓣像太阳一样……' },
+                    { emoji: '🐥', name: '小鸡', hint: '刚孵出来的小鸡毛茸茸的，是什么颜色？' },
+                    { emoji: '⭐', name: '星星', hint: '夜空中一闪一闪的星星是什么颜色？' },
+                    { emoji: '🌽', name: '玉米', hint: '爆米花是用什么颜色的玉米做的？' },
+                    { emoji: '🍋', name: '柠檬', hint: '柠檬酸酸的，它的皮是什么颜色？' },
+                ]
+            },
+            '绿色': {
+                items: [
+                    { emoji: '🌿', name: '树叶', hint: '春天来了，树上的叶子是什么颜色？' },
+                    { emoji: '🍉', name: '西瓜皮', hint: '大西瓜的外皮是什么颜色的？' },
+                    { emoji: '🥒', name: '黄瓜', hint: '夏天吃的凉拌黄瓜是什么颜色？' },
+                    { emoji: '🐸', name: '青蛙', hint: '小青蛙呱呱叫，它的皮肤是什么颜色？' },
+                    { emoji: '🌳', name: '大树', hint: '公园里的大树，叶子是什么颜色？' },
+                    { emoji: '🥝', name: '猕猴桃', hint: '猕猴桃切开之前，外皮是什么颜色？' },
+                ]
+            },
+            '蓝色': {
+                items: [
+                    { emoji: '🌤️', name: '天空', hint: '抬头看看，晴朗的天空是什么颜色？' },
+                    { emoji: '🌊', name: '大海', hint: '站在海边望去，海水是什么颜色？' },
+                    { emoji: '🦋', name: '蝴蝶', hint: '有些美丽的蝴蝶翅膀是什么颜色？' },
+                    { emoji: '💧', name: '水滴', hint: '大大的水滴在阳光下会透出什么颜色？' },
+                    { emoji: '🧢', name: '帽子', hint: '有的棒球帽就是这个颜色哦！' },
+                    { emoji: '🐟', name: '蓝鱼', hint: '水族馆里有些小鱼是什么颜色？' },
+                ]
+            },
+            '紫色': {
+                items: [
+                    { emoji: '🍇', name: '葡萄', hint: '一串串的葡萄，最常见的是什么颜色？' },
+                    { emoji: '🫐', name: '蓝莓', hint: '虽然叫"蓝"莓，但它的颜色更接近……？' },
+                    { emoji: '🍆', name: '茄子', hint: '蔬菜茄子外皮是什么颜色？' },
+                    { emoji: '💜', name: '爱心', hint: '紫色的爱心，很浪漫的颜色！' },
+                    { emoji: '🌸', name: '紫藤花', hint: '春天有一种垂下来的漂亮花，是……？' },
+                    { emoji: '🧅', name: '紫洋葱', hint: '有一种洋葱切开，里面是……？' },
+                ]
+            }
+        };
+        // ==================== 游戏状态 ====================
+        const TOTAL_ROUNDS = 10;
+        let currentPhase = 'look';   // 'look' | 'choose' | 'find'
+        let currentColor = null;
+        let currentItem = null;
+        let currentOptions = [];     // for 'find' phase: which color options to show
+        let score = 0;
+        let round = 0;
+        let answeredThisRound = false;
+        let hintsUsed = 0;
+        let wrongAttempts = 0;       // 当前题错误次数
+        // ==================== 初始化 ====================
+        function initGame() {
+            score = 0;
+            round = 0;
+            hintsUsed = 0;
+            updateScoreDisplay();
+            updatePhaseIndicator('look');
+            startNewRound();
+        }
+        // ==================== 阶段切换 ====================
+        function updatePhaseIndicator(phase) {
+            currentPhase = phase;
+            const dots = {
+                'look': document.getElementById('phaseDot1'),
+                'choose': document.getElementById('phaseDot2'),
+                'find': document.getElementById('phaseDot3'),
+            };
+            // 清除所有状态
+            Object.values(dots).forEach(d => {
+                d.classList.remove('active', 'done');
+            });
+            if (phase === 'look') {
+                dots['look'].classList.add('active');
+            } else if (phase === 'choose') {
+                dots['look'].classList.add('done');
+                dots['choose'].classList.add('active');
+            } else if (phase === 'find') {
+                dots['look'].classList.add('done');
+                dots['choose'].classList.add('done');
+                dots['find'].classList.add('active');
+            }
+        }
+        // ==================== 开始新题目 ====================
+        function startNewRound() {
+            round++;
+            answeredThisRound = false;
+            wrongAttempts = 0;
+            document.getElementById('roundInfo').textContent = `第 ${round}/${TOTAL_ROUNDS} 题`;
+            document.getElementById('progressBar').style.width = `${(round / TOTAL_ROUNDS) * 100}%`;
+            document.getElementById('nextBtn').disabled = true;
+            document.getElementById('feedbackArea').innerHTML = '';
+            enableColorButtons(true);
+            // 根据轮次分配阶段
+            if (round <= 3) {
+                updatePhaseIndicator('look');
+                setupLookPhase();
+            } else if (round <= 7) {
+                updatePhaseIndicator('choose');
+                setupChoosePhase();
+            } else {
+                updatePhaseIndicator('find');
+                setupFindPhase();
+            }
+        }
+        // ==================== 阶段一：看一看（感知阶段） ====================
+        function setupLookPhase() {
+            // 随机选一个颜色和一个物品
+            const colors = Object.keys(colorDatabase);
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            const items = colorDatabase[currentColor].items;
+            currentItem = items[Math.floor(Math.random() * items.length)];
+            document.getElementById('questionPrompt').textContent = '👀 看一看，这是什么颜色？';
+            document.getElementById('objectEmoji').textContent = currentItem.emoji;
+            document.getElementById('objectName').innerHTML =
+                `这是一个 <span style="color:${getColorHex(currentColor)};font-weight:bold;font-size:1.2em;">${currentColor}</span> 的${currentItem.name}`;
+            document.getElementById('speakBtn').style.display = 'inline-flex';
+        }
+        // ==================== 阶段二：选一选（理解操作阶段） ====================
+        function setupChoosePhase() {
+            const colors = Object.keys(colorDatabase);
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            const items = colorDatabase[currentColor].items;
+            currentItem = items[Math.floor(Math.random() * items.length)];
+            document.getElementById('questionPrompt').textContent = '✋ 这个物品是什么颜色？点一点！';
+            document.getElementById('objectEmoji').textContent = currentItem.emoji;
+            document.getElementById('objectName').innerHTML =
+                `${currentItem.name} 是什么颜色的？ <span class="color-blank"></span>`;
+            document.getElementById('speakBtn').style.display = 'inline-flex';
+        }
+        // ==================== 阶段三：找一找（生活迁移阶段） ====================
+        function setupFindPhase() {
+            const colors = Object.keys(colorDatabase);
+            currentColor = colors[Math.floor(Math.random() * colors.length)];
+            const items = colorDatabase[currentColor].items;
+            currentItem = items[Math.floor(Math.random() * items.length)];
+            document.getElementById('questionPrompt').textContent = '🔍 找一找，哪个物品是这个颜色的？';
+            document.getElementById('objectEmoji').textContent = '❓';
+            // 显示颜色块而不是物品
+            const colorHex = getColorHex(currentColor);
+            document.getElementById('objectEmoji').style.cssText = `
+                width: 120px; height: 120px; border-radius: 50%;
+                background: ${colorHex};
+                margin: 10px auto;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+                animation: float 3s ease-in-out infinite;
+                font-size: 0;
+            `;
+            document.getElementById('objectName').innerHTML =
+                `什么东西是 <span style="color:${colorHex};font-weight:bold;font-size:1.2em;">${currentColor}</span> 的呢？`;
+            document.getElementById('speakBtn').style.display = 'none';
+            // 生成物品选项（3个，其中1个正确）
+            generateFindOptions();
+        }
+        function generateFindOptions() {
+            const correctItem = currentItem;
+            // 从其他颜色中随机选2个干扰物品
+            const otherColors = Object.keys(colorDatabase).filter(c => c !== currentColor);
+            const distractors = [];
+            const usedColors = new Set();
+            while (distractors.length < 2) {
+                const randColor = otherColors[Math.floor(Math.random() * otherColors.length)];
+                if (usedColors.has(randColor)) continue;
+                usedColors.add(randColor);
+                const randItems = colorDatabase[randColor].items;
+                const randItem = randItems[Math.floor(Math.random() * randItems.length)];
+                distractors.push(randItem);
+            }
+            // 合并并打乱
+            currentOptions = [correctItem, ...distractors];
+            shuffleArray(currentOptions);
+            // 更新颜色按钮为物品选项
+            const optionsContainer = document.getElementById('colorOptions');
+            const optionLabels = ['A', 'B', 'C'];
+            optionsContainer.innerHTML = currentOptions.map((item, i) => `
+                <button class="color-btn" style="
+                    background: radial-gradient(circle at 35% 35%, #fff, #f0f0f0 80%);
+                    color: #555;
+                    font-size: clamp(12px, 2.5vw, 15px);
+                    width: clamp(80px, 20vw, 120px);
+                    height: clamp(80px, 20vw, 120px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 4px;
+                    border-color: #ddd;
+                " data-answer="${item.emoji}" onclick="selectFindAnswer('${item.emoji}', this)">
+                    <span style="font-size: clamp(30px, 8vw, 48px);">${item.emoji}</span>
+                    <span style="font-size: clamp(11px, 2vw, 14px);">${item.name}</span>
+                </button>
+            `).join('');
+        }
+        // ==================== 颜色选择（看一看和选一选阶段） ====================
+        function selectColor(selectedColor, btnElement) {
+            if (answeredThisRound) return;
+            if (currentPhase === 'find') return; // 找一找阶段用不同逻辑
+            answeredThisRound = true;
+            enableColorButtons(false);
+            if (selectedColor === currentColor) {
+                // ✅ 正确！
+                handleCorrectAnswer(btnElement);
+            } else {
+                // ❌ 错误
+                handleWrongAnswer(btnElement, selectedColor);
+            }
+        }
+        // ==================== 找一找阶段选择 ====================
+        function selectFindAnswer(selectedEmoji, btnElement) {
+            if (answeredThisRound) return;
+            answeredThisRound = true;
+            // 禁用所有选项按钮
+            const allBtns = document.querySelectorAll('#colorOptions .color-btn');
+            allBtns.forEach(b => b.classList.add('disabled'));
+            if (selectedEmoji === currentItem.emoji) {
+                // ✅ 正确！
+                handleCorrectAnswer(btnElement);
+            } else {
+                // ❌ 错误
+                handleWrongAnswer(btnElement, null);
+            }
+        }
+        // ==================== 正确答案处理 ====================
+        function handleCorrectAnswer(btnElement) {
+            score += 10;
+            updateScoreDisplay();
+            updateStarAnimation();
+            // 按钮动画
+            if (btnElement) {
+                btnElement.classList.add('correct-pulse');
+            }
+            // 撒花
+            spawnConfetti();
+            // 反馈信息
+            const feedbackArea = document.getElementById('feedbackArea');
+            const praises = [
+                '🎉 太棒了！你答对啦！',
+                '👏 真厉害！颜色认得真准！',
+                '🌟 非常好！继续加油！',
+                '💪 太聪明了！一下子就找到了！',
+                '🥳 完美！你真是颜色小专家！',
+                '😊 对了对了！做得真好！',
+            ];
+            const praise = praises[Math.floor(Math.random() * praises.length)];
+            feedbackArea.innerHTML = `<div class="feedback-msg correct">${praise}</div>`;
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').focus();
+            // 语音播报（利用浏览器 TTS）
+            speakText('太棒了！你答对了！');
+            // 播放一下物品名称确认
+            document.getElementById('objectName').innerHTML =
+                currentPhase === 'find'
+                ? `对啦！<span style="color:${getColorHex(currentColor)};font-weight:bold;font-size:1.2em;">${currentColor}</span> 的${currentItem.name} ${currentItem.emoji}`
+                : `对啦！${currentItem.name} 就是 <span style="color:${getColorHex(currentColor)};font-weight:bold;font-size:1.2em;">${currentColor}</span> 的！`;
+        }
+        // ==================== 错误答案处理 ====================
+        function handleWrongAnswer(btnElement, selectedColor) {
+            wrongAttempts++;
+            // 按钮抖动
+            if (btnElement) {
+                btnElement.classList.add('shake');
+                setTimeout(() => btnElement.classList.remove('shake'), 500);
+            }
+            const feedbackArea = document.getElementById('feedbackArea');
+            let hintMsg = '';
+            if (wrongAttempts === 1) {
+                // 第一次错误：温和提示
+                const encouragements = [
+                    '😊 再想想看哦，不对呢～',
+                    '🤔 好像不太对，再试一次吧！',
+                    '💭 差一点点，换一个试试？',
+                    '🙂 没关系，可以再试一次！',
+                    '😉 加油！再猜一猜！',
+                ];
+                hintMsg = encouragements[Math.floor(Math.random() * encouragements.length)];
+            } else {
+                // 第二次以上：给出具体提示
+                if (currentPhase === 'find') {
+                    hintMsg = `🔍 提示：想一想，${currentColor}的东西有哪些？再看看上面的物品吧！`;
+                } else {
+                    hintMsg = `💡 小提示：${currentItem.hint}`;
+                }
+                // 高亮正确答案供参考（仅提示，不直接告诉）
+                highlightCorrectOption();
+            }
+            feedbackArea.innerHTML = `<div class="feedback-msg wrong">${hintMsg}</div>`;
+            speakText('不太对哦，再试一次吧！');
+            // 允许重试
+            answeredThisRound = false;
+            enableColorButtons(true);
+            if (btnElement) btnElement.classList.add('disabled'); // 禁用刚选错的
+            // 2秒后恢复
+            setTimeout(() => {
+                if (btnElement) btnElement.classList.remove('disabled');
+            }, 800);
+        }
+        function highlightCorrectOption() {
+            // 短暂闪烁正确答案
+            if (currentPhase === 'find') {
+                const allBtns = document.querySelectorAll('#colorOptions .color-btn');
+                allBtns.forEach(b => {
+                    if (b.dataset.answer === currentItem.emoji) {
+                        b.style.boxShadow = '0 0 20px rgba(255,215,0,0.7)';
+                        b.style.borderColor = '#ffd700';
+                        setTimeout(() => {
+                            b.style.boxShadow = '';
+                            b.style.borderColor = '#ddd';
+                        }, 1500);
+                    }
+                });
+            } else {
+                const allBtns = document.querySelectorAll('#colorOptions .color-btn');
+                allBtns.forEach(b => {
+                    if (b.dataset.color === currentColor) {
+                        b.style.boxShadow = '0 0 20px rgba(255,215,0,0.7)';
+                        b.style.borderColor = '#ffd700';
+                        setTimeout(() => {
+                            b.style.boxShadow = '';
+                            b.style.borderColor = 'rgba(255,255,255,0.8)';
+                        }, 1500);
+                    }
+                });
+            }
+        }
+        // ==================== 提示按钮 ====================
+        function showHint() {
+            if (answeredThisRound) return;
+            hintsUsed++;
+            const feedbackArea = document.getElementById('feedbackArea');
+            if (currentPhase === 'find') {
+                feedbackArea.innerHTML = `<div class="feedback-msg hint">💡 提示：${currentColor}的东西在生活中很常见哦！看看哪个物品是${currentColor}的？</div>`;
+            } else {
+                feedbackArea.innerHTML = `<div class="feedback-msg hint">💡 ${currentItem.hint}</div>`;
+            }
+            // 短暂高亮
+            highlightCorrectOption();
+            // 如果使用提示超过2次，直接显示答案并标记为已答
+            if (hintsUsed >= 100) { // 允许无限提示，但会降低趣味性
+                // 不强制跳过
+            }
+        }
+        // ==================== 下一题 ====================
+        function nextQuestion() {
+            if (round >= TOTAL_ROUNDS) {
+                showCompleteModal();
+                return;
+            }
+            // 恢复寻找阶段的 emoji 显示
+            const emojiEl = document.getElementById('objectEmoji');
+            emojiEl.style.cssText = '';
+            emojiEl.textContent = '';
+            // 恢复颜色按钮
+            resetColorButtons();
+            startNewRound();
+        }
+        function resetColorButtons() {
+            const container = document.getElementById('colorOptions');
+            const colors = ['红色', '橙色', '黄色', '绿色', '蓝色', '紫色'];
+            const colorClasses = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+            container.innerHTML = colors.map((c, i) => `
+                <button class="color-btn ${colorClasses[i]}" data-color="${c}" onclick="selectColor('${c}', this)">${c}</button>
+            `).join('');
+        }
+        function enableColorButtons(enable) {
+            const buttons = document.querySelectorAll('#colorOptions .color-btn');
+            buttons.forEach(b => {
+                if (enable) {
+                    b.classList.remove('disabled');
+                } else {
+                    b.classList.add('disabled');
+                }
+            });
+        }
+        // ==================== 分数与星星 ====================
+        function updateScoreDisplay() {
+            document.getElementById('scoreText').textContent = `得分：${score}`;
+        }
+        function updateStarAnimation() {
+            const starsContainer = document.getElementById('starsDisplay');
+            const earnedStars = Math.min(5, Math.floor(score / 20) + 1); // 每20分一颗星
+            const starSpans = starsContainer.querySelectorAll('.star');
+            starSpans.forEach((star, i) => {
+                if (i < earnedStars) {
+                    star.textContent = '🌟';
+                    star.classList.add('earned');
+                }
+            });
+        }
+        // ==================== 撒花特效 ====================
+        function spawnConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#ff922b', '#cc5de8',
+                             '#ff8787', '#74c0fc', '#ffc9c9', '#96f2d7', '#fcc2d7', '#a9e34b'];
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < 60; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.top = -(Math.random() * 20) + 'px';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDelay = Math.random() * 0.6 + 's';
+                piece.style.animationDuration = (1.2 + Math.random() * 1.8) + 's';
+                piece.style.width = (8 + Math.random() * 14) + 'px';
+                piece.style.height = (8 + Math.random() * 14) + 'px';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+                fragment.appendChild(piece);
+            }
+            container.appendChild(fragment);
+            // 清理
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 2500);
+        }
+        // ==================== TTS 语音 ====================
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                // 取消之前的语音
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.1;
+                utterance.volume = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+        function speakQuestion() {
+            if (currentPhase === 'find') {
+                speakText(`请找出${currentColor}的物品`);
+            } else if (currentItem) {
+                speakText(`这是什么颜色？${currentItem.name}`);
+            }
+        }
+        // ==================== 弹窗 ====================
+        function showCompleteModal() {
+            const totalPossible = TOTAL_ROUNDS * 10;
+            const percentage = Math.round((score / totalPossible) * 100);
+            let emoji, title, message;
+            if (percentage >= 90) {
+                emoji = '🏆'; title = '太厉害了！';
+                message = `你拿到了 ${score} 分！\n你是颜色认知小达人！\n生活中的颜色你都认识啦！`;
+            } else if (percentage >= 60) {
+                emoji = '🎉'; title = '做得不错！';
+                message = `你拿到了 ${score} 分！\n继续练习，你会越来越棒的！`;
+            } else {
+                emoji = '💪'; title = '继续加油！';
+                message = `你拿到了 ${score} 分！\n没关系，多练习几次就好了！\n老师相信你！`;
+            }
+            document.getElementById('completeStars').textContent =
+                '🌟'.repeat(Math.min(5, Math.floor(score / 20) + 1)) +
+                '⭐'.repeat(Math.max(0, 5 - Math.floor(score / 20) - 1));
+            document.getElementById('completeMessage').textContent = message;
+            document.getElementById('completeModal').classList.add('show');
+            speakText(title + message);
+        }
+        function closeModal() {
+            document.getElementById('resultModal').classList.remove('show');
+        }
+        // ==================== 重新开始 ====================
+        function resetGame() {
+            score = 0;
+            round = 0;
+            hintsUsed = 0;
+            answeredThisRound = false;
+            wrongAttempts = 0;
+            updateScoreDisplay();
+            updatePhaseIndicator('look');
+            document.getElementById('completeModal').classList.remove('show');
+            document.getElementById('resultModal').classList.remove('show');
+            document.getElementById('feedbackArea').innerHTML = '';
+            // 恢复星星
+            const starSpans = document.querySelectorAll('#starsDisplay .star');
+            starSpans.forEach(s => { s.textContent = '⭐'; s.classList.remove('earned'); });
+            // 恢复 emoji 显示
+            const emojiEl = document.getElementById('objectEmoji');
+            emojiEl.style.cssText = '';
+            emojiEl.textContent = '';
+            // 恢复颜色按钮
+            resetColorButtons();
+            startNewRound();
+        }
+        // ==================== 工具函数 ====================
+        function getColorHex(colorName) {
+            const map = {
+                '红色': '#e8453c',
+                '橙色': '#f7931e',
+                '黄色': '#f0d820',
+                '绿色': '#3cb043',
+                '蓝色': '#2d8ab8',
+                '紫色': '#9b59b6',
+            };
+            return map[colorName] || '#999';
+        }
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+        // ==================== 键盘快捷键（方便教师操作） ====================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (!document.getElementById('nextBtn').disabled) {
+                    nextQuestion();
+                }
+            }
+            if (e.key === 'r' || e.key === 'R') {
+                if (e.ctrlKey) return;
+                resetGame();
+            }
+            if (e.key === 'h' || e.key === 'H') {
+                if (e.ctrlKey) return;
+                showHint();
+            }
+            if (e.key === 's' || e.key === 'S') {
+                if (e.ctrlKey) return;
+                speakQuestion();
+            }
+        });
+        // ==================== 启动游戏 ====================
+        initGame();
+    </script>
+</body>
+</html>
